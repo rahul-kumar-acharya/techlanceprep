@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /tech-admin/
+Disallow: /accounts/
+Disallow: /dashboard/
+Disallow: /practice/bookmarks/
+Disallow: /practice/api/
+
+Sitemap: https://techlanceprep.in/sitemap.xml
