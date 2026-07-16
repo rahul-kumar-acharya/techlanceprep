@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.views.decorators.http import require_GET
 from practice.models import Topic, Question
 from accounts.models import User
 
@@ -28,4 +30,28 @@ def privacy_policy(request):
 
 def terms_of_service(request):
     return render(request, 'core/terms_of_service.html')
+
+
+@require_GET
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Disallow: /admin/",
+        "Disallow: /tech-admin/",
+        "Disallow: /accounts/",
+        "Disallow: /dashboard/",
+        "Disallow: /practice/bookmarks/",
+        "Disallow: /practice/api/",
+        "",
+        f"Sitemap: {request.scheme}://{request.get_host()}/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+@require_GET
+def google_verify(request, code):
+    content = f"google-site-verification: google{code}.html"
+    return HttpResponse(content, content_type="text/plain")
+
+
 

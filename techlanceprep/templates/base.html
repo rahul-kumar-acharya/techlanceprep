@@ -12,6 +12,30 @@
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     
+    <!-- Google Search Console Verification -->
+    {% block google_site_verification %}{% endblock %}
+    
+    <!-- Canonical Link -->
+    <link rel="canonical" href="{% block canonical_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}TechlancePrep | Best Technical & Coding Interview Preparation Platform{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Master your software engineering interviews with TechlancePrep. Premium practice for Data Structures (DSA), System Design, Frontend Mastery, and Backend development questions curated by experts.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}/static/images/og-image.png{% endblock %}">
+    <meta property="og:site_name" content="TechlancePrep">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+    <meta name="twitter:url" content="{% block twitter_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta name="twitter:title" content="{% block twitter_title %}TechlancePrep | Best Technical & Coding Interview Preparation Platform{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Master your software engineering interviews with TechlancePrep. Premium practice for Data Structures (DSA), System Design, Frontend Mastery, and Backend development questions curated by experts.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}/static/images/og-image.png{% endblock %}">
+
+    <!-- Structured Data -->
+    {% block schema_markup %}{% endblock %}
+    
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%236366f1%22/><text y=%22.9em%22 font-size=%2270%22 x=%2210%22 fill=%22white%22 font-family=%22monospace%22 font-weight=%22bold%22>&gt;_</text></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -140,9 +164,10 @@
                         Building the next generation of software engineers through structured learning and career-focused practice.
                     </p>
                     <div class="flex space-x-5 text-xl">
-                        <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
-                        <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="hover:text-accent transition-colors"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://github.com/rahul-kumar-acharya" target="_blank" rel="noopener" class="hover:text-accent transition-colors" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/rahulkumaracharya/" target="_blank" rel="noopener" class="hover:text-accent transition-colors" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://acharyarahul.in" target="_blank" rel="noopener" class="hover:text-accent transition-colors" title="Portfolio"><i class="fas fa-globe"></i></a>
+                        <a href="https://acharyaworks.in" target="_blank" rel="noopener" class="hover:text-accent transition-colors" title="Works Portfolio"><i class="fas fa-briefcase"></i></a>
                     </div>
                 </div>
                 
@@ -194,7 +219,7 @@
             </div>
             
             <div class="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
-                <p>&copy; 2026 TechlancePrep. Crafted for excellence.</p>
+                <p>&copy; 2026 TechlancePrep. Crafted with excellence by <a href="https://acharyarahul.in" target="_blank" rel="noopener" class="text-accent hover:underline">Rahul Kumar Acharya</a>.</p>
                 <div class="flex gap-6">
                     <span>Status: <span class="text-accent">● All Systems Go</span></span>
                 </div>

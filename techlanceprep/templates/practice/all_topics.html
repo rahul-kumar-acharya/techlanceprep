@@ -6,6 +6,33 @@
 
 {% block meta_keywords %}interview roadmaps, coding curriculum, master DSA, system design track, technical training modules, TechlancePrep topics{% endblock %}
 
+{% block og_title %}Technical Interview Curriculums | TechlancePrep Training Modules{% endblock %}
+{% block og_description %}Explore our expert-curated technical interview tracks. From Data Structures and Algorithms to System Design and Full-Stack development, master the specific skills needed to ace the software engineering loop.{% endblock %}
+{% block twitter_title %}Technical Interview Curriculums | TechlancePrep Training Modules{% endblock %}
+{% block twitter_description %}Explore our expert-curated technical interview tracks. From Data Structures and Algorithms to System Design and Full-Stack development, master the specific skills needed to ace the software engineering loop.{% endblock %}
+
+{% block schema_markup %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Technical Interview Curriculums",
+  "url": "{{ request.build_absolute_uri }}",
+  "description": "A list of curated technical interview training modules and coding roadmap paths.",
+  "itemListElement": [
+    {% for topic in all_topics %}
+    {
+      "@type": "ListItem",
+      "position": {{ forloop.counter }},
+      "url": "{{ request.scheme }}://{{ request.get_host }}{{ topic.get_absolute_url }}",
+      "name": "{{ topic.name }}"
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="min-h-screen bg-[#0B0F1A] pb-24 relative overflow-hidden">
     
@@ -75,6 +102,7 @@
     .line-clamp-3 {
         display: -webkit-box;
         -webkit-line-clamp: 3;
+        line-clamp: 3;
         -webkit-box-orient: vertical;  
         overflow: hidden;
     }

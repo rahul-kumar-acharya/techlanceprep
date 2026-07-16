@@ -6,6 +6,28 @@
 
 {% block meta_keywords %}contact techlanceprep, technical support, coding community, report a bug, software engineering help, techlanceprep discord{% endblock %}
 
+{% block og_title %}Contact TechlancePrep | Technical Support & Community Inquiry{% endblock %}
+{% block og_description %}Have questions about TechlancePrep? Contact our technical support team, report a bug, or join our developer community on Discord. We are here to help you master your engineering interviews.{% endblock %}
+{% block twitter_title %}Contact TechlancePrep | Technical Support & Community Inquiry{% endblock %}
+{% block twitter_description %}Have questions about TechlancePrep? Contact our technical support team, report a bug, or join our developer community on Discord. We are here to help you master your engineering interviews.{% endblock %}
+
+{% block schema_markup %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact TechlancePrep",
+  "url": "{{ request.build_absolute_uri }}",
+  "description": "Get in touch with TechlancePrep for support inquiries, reporting bugs, or joining our professional coding community.",
+  "mainEntity": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "support@techlanceprep.com"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="min-h-screen bg-[#0B0F1A] flex flex-col items-center justify-center py-20 px-6 relative overflow-hidden">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent opacity-50"></div>

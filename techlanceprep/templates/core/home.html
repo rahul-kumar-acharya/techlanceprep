@@ -6,6 +6,46 @@
 
 {% block meta_keywords %}free coding interview prep, DSA practice online, system design interview questions, tech career roadmap, FAANG interview preparation, TechlancePrep home{% endblock %}
 
+{% block og_title %}TechlancePrep | Free Technical Interview Prep, DSA & System Design{% endblock %}
+{% block og_description %}TechlancePrep is the ultimate 100% free platform for software engineers. Master Data Structures (DSA), System Design, and modern frameworks with curated roadmaps, real-time tracking, and FAANG-level interview questions.{% endblock %}
+{% block twitter_title %}TechlancePrep | Free Technical Interview Prep, DSA & System Design{% endblock %}
+{% block twitter_description %}TechlancePrep is the ultimate 100% free platform for software engineers. Master Data Structures (DSA), System Design, and modern frameworks with curated roadmaps, real-time tracking, and FAANG-level interview questions.{% endblock %}
+
+{% block schema_markup %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "TechlancePrep",
+  "url": "{{ request.scheme }}://{{ request.get_host }}",
+  "description": "TechlancePrep is the ultimate 100% free platform for software engineers to master Data Structures (DSA), System Design, Frontend Mastery, and Backend development questions curated by experts.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "{{ request.scheme }}://{{ request.get_host }}/practice/?q={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "TechlancePrep",
+  "url": "{{ request.scheme }}://{{ request.get_host }}",
+  "logo": "{{ request.scheme }}://{{ request.get_host }}/static/images/og-image.png",
+  "sameAs": [
+    "https://acharyarahul.in",
+    "https://acharyaworks.in",
+    "https://github.com/rahul-kumar-acharya",
+    "https://www.linkedin.com/in/rahulkumaracharya/"
+  ]
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <section class="relative pt-20 pb-32 overflow-hidden bg-primary">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/20 via-transparent to-transparent opacity-50"></div>

@@ -6,6 +6,23 @@
 
 {% block meta_keywords %}engineering manifesto, free coding practice, democratizing tech education, accessible software engineering, techlanceprep mission{% endblock %}
 
+{% block og_title %}The TechlancePrep Manifesto | Our Mission to Democratize Engineering{% endblock %}
+{% block og_description %}Read the TechlancePrep manifesto. We believe in removing financial barriers to technical excellence by providing $0 cost DSA practice, growth tracking, and expert-curated interview resources for all.{% endblock %}
+{% block twitter_title %}The TechlancePrep Manifesto | Our Mission to Democratize Engineering{% endblock %}
+{% block twitter_description %}Read the TechlancePrep manifesto. We believe in removing financial barriers to technical excellence by providing $0 cost DSA practice, growth tracking, and expert-curated interview resources for all.{% endblock %}
+
+{% block schema_markup %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About TechlancePrep",
+  "url": "{{ request.build_absolute_uri }}",
+  "description": "TechlancePrep was founded to democratize software engineering interview preparation by offering high-fidelity DSA practice and analytics resources at zero cost."
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <div class="min-h-screen bg-[#0B0F1A] text-slate-300">
     
