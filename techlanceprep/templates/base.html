@@ -75,6 +75,71 @@
 </head>
 <body class="bg-brand-canvas text-brand-ink min-h-screen flex flex-col selection:bg-brand-amber selection:text-white">
 
+    <!-- Premium Cybernetic Loading Page Overlay -->
+    <div id="page-loader" class="fixed inset-0 bg-brand-canvas z-[9999] flex flex-col justify-center items-center transition-all duration-500">
+        <!-- Ambient subtle glow behind the loader -->
+        <div class="absolute w-[400px] h-[400px] bg-brand-amber/[0.03] rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="relative z-10 w-full max-w-md px-8 flex flex-col items-center gap-8">
+            
+            <!-- Orbiting Brand Icon Header -->
+            <div class="relative flex items-center justify-center w-24 h-24">
+                <!-- Circular outer spinning orbit -->
+                <div class="absolute inset-0 border-2 border-dashed border-brand-amber/30 rounded-full animate-spin [animation-duration:15s]"></div>
+                <!-- Inner reverse spinning orbit -->
+                <div class="absolute inset-2 border border-brand-soft/40 border-t-brand-amber rounded-full animate-spin [animation-duration:4s]"></div>
+                
+                <!-- Center Obsidian Logo Tile -->
+                <div class="absolute w-12 h-12 bg-brand-ink rounded-xl border border-brand-ink flex items-center justify-center shadow-premium-md animate-pulse">
+                    <span class="font-mono text-xl font-bold text-brand-amber">&gt;_</span>
+                </div>
+            </div>
+
+            <!-- Sleek Cyber Terminal Box -->
+            <div class="w-full bg-brand-ink text-brand-surface/90 border border-brand-ink rounded-xl p-5 shadow-premium-md font-mono text-[11px] leading-relaxed relative overflow-hidden">
+                <!-- Terminal header dots -->
+                <div class="flex items-center gap-1.5 mb-3.5 border-b border-brand-surface/10 pb-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+                    <span class="ml-2 text-[9px] text-brand-surface/40 uppercase tracking-widest font-bold">Compiler Shell v1.0.4</span>
+                </div>
+                
+                <!-- Interactive Log lines -->
+                <div class="space-y-2 text-brand-surface/75">
+                    <div id="log-line-1" class="opacity-0 transition-opacity duration-300 flex items-center gap-2">
+                        <span class="text-emerald-500 font-bold">✓</span>
+                        <span>Connection to data node secure.</span>
+                    </div>
+                    <div id="log-line-2" class="opacity-0 transition-opacity duration-300 flex items-center gap-2">
+                        <span class="text-emerald-500 font-bold">✓</span>
+                        <span>Parsed 600 algorithm challenges.</span>
+                    </div>
+                    <div id="log-line-3" class="opacity-0 transition-opacity duration-300 flex items-center gap-2">
+                        <span class="text-emerald-500 font-bold">✓</span>
+                        <span>Mounted telemetry indexes.</span>
+                    </div>
+                    <div id="log-line-4" class="opacity-0 transition-opacity duration-300 flex items-center gap-2">
+                        <span class="text-brand-amber animate-pulse font-bold">&gt;</span>
+                        <span class="text-brand-surface">Launching prep command center...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full space-y-2">
+                <div class="h-1.5 w-full bg-brand-soft/30 rounded-full overflow-hidden border border-brand-soft/20">
+                    <div id="loader-progress-bar" class="h-full bg-brand-amber transition-all duration-300 ease-out" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between items-center text-[10px] uppercase font-bold text-brand-muted/70 tracking-widest font-mono px-0.5">
+                    <span>Compiling</span>
+                    <span id="loader-percentage">0%</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- Premium Header Area -->
     <nav class="sticky top-0 z-50 glass-nav border-b border-brand-ink/[0.06] transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
@@ -150,7 +215,7 @@
     {% if messages %}
         <div class="fixed top-20 right-6 z-[60] w-full max-w-sm space-y-3">
             {% for message in messages %}
-                <div class="p-4 rounded-lg shadow-premium-md border-l-4 border-l-brand-amber border border-brand-ink/[0.06] glass-card text-brand-ink flex items-start gap-3.5 transition-all text-[13px] leading-relaxed">
+                <div class="notification-item p-4 rounded-lg shadow-premium-md border-l-4 border-l-brand-amber border border-brand-ink/[0.06] glass-card text-brand-ink flex items-start gap-3.5 transition-all duration-300 transform translate-x-0 text-[13px] leading-relaxed">
                     <i class="fas fa-circle-info text-brand-amber mt-0.5"></i>
                     <div class="flex-1">{{ message }}</div>
                 </div>
@@ -241,6 +306,103 @@
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
         }
+
+        // Trigger loader animation sequence
+        function startLoaderAnimation() {
+            const bar = document.getElementById('loader-progress-bar');
+            const percent = document.getElementById('loader-percentage');
+            const line1 = document.getElementById('log-line-1');
+            const line2 = document.getElementById('log-line-2');
+            const line3 = document.getElementById('log-line-3');
+            const line4 = document.getElementById('log-line-4');
+            
+            if (!bar) return;
+
+            // Reset states
+            bar.style.width = '0%';
+            if (percent) percent.innerText = '0%';
+            if (line1) line1.classList.add('opacity-0');
+            if (line2) line2.classList.add('opacity-0');
+            if (line3) line3.classList.add('opacity-0');
+            if (line4) line4.classList.add('opacity-0');
+
+            // Phase 1: Line 1 appears & progress grows to 25%
+            setTimeout(() => {
+                if (line1) line1.classList.remove('opacity-0');
+                bar.style.width = '25%';
+                if (percent) percent.innerText = '25%';
+            }, 100);
+
+            // Phase 2: Line 2 appears & progress grows to 55%
+            setTimeout(() => {
+                if (line2) line2.classList.remove('opacity-0');
+                bar.style.width = '55%';
+                if (percent) percent.innerText = '55%';
+            }, 250);
+
+            // Phase 3: Line 3 appears & progress grows to 80%
+            setTimeout(() => {
+                if (line3) line3.classList.remove('opacity-0');
+                bar.style.width = '80%';
+                if (percent) percent.innerText = '80%';
+            }, 400);
+
+            // Phase 4: Line 4 appears & progress grows to 100%
+            setTimeout(() => {
+                if (line4) line4.classList.remove('opacity-0');
+                bar.style.width = '100%';
+                if (percent) percent.innerText = '100%';
+            }, 550);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start loader compile simulation
+            startLoaderAnimation();
+
+            // Auto-dismiss Django notifications after 2 seconds
+            const items = document.querySelectorAll('.notification-item');
+            items.forEach((item) => {
+                setTimeout(() => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateX(100%)';
+                    setTimeout(() => {
+                        item.remove();
+                    }, 300);
+                }, 2000);
+            });
+        });
+
+        // Hide full-screen loading skeleton once page elements are fully parsed and ready (handles standard load and bfcache back-button page restores)
+        function hideLoader() {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                // Ensure progress finishes on load
+                const bar = document.getElementById('loader-progress-bar');
+                const percent = document.getElementById('loader-percentage');
+                if (bar) bar.style.width = '100%';
+                if (percent) percent.innerText = '100%';
+                
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500);
+                }, 400); // Small delay to let user see completion animation
+            }
+        }
+
+        window.addEventListener('load', hideLoader);
+        window.addEventListener('pageshow', hideLoader);
+
+        // Show page loader transition instantly when navigating to the next page
+        window.addEventListener('beforeunload', () => {
+            const loader = document.getElementById('page-loader');
+            if (loader) {
+                loader.style.display = 'flex';
+                loader.style.opacity = '1';
+                startLoaderAnimation();
+            }
+        });
     </script>
     
     {% block extra_js %}{% endblock %}
