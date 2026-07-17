@@ -7,53 +7,61 @@
 {% block meta_keywords %}learning paths for developers, coding interview tracks, master technical stack, software engineering curriculum, DSA roadmap, TechlancePrep training{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-[#0B0F1A] pb-24">
+<div class="min-h-screen bg-brand-canvas pb-24 relative overflow-hidden text-brand-muted">
 
-    <div class="relative py-20 overflow-hidden border-b border-white/5">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent opacity-60"></div>
-        
-        <div class="container mx-auto px-6 relative z-10 text-center">
-            <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter mb-6">
-                SELECT YOUR <span class="text-accent">PATH</span>
-            </h3>
-            <p class="text-slate-400 max-w-2xl mx-auto text-lg">
-                Structured learning paths designed by industry experts. Pick a domain and start mastering the technical interview.
+    <!-- Ambient Tech Glow Backdrop -->
+    <div class="absolute inset-0 bg-[radial-gradient(#f97316/[0.015]_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-amber/5 via-transparent to-transparent opacity-70 pointer-events-none"></div>
+    
+    <!-- Hero Header Banner Area -->
+    <div class="relative py-20 border-b border-brand-ink/[0.04] overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 text-center relative z-10">
+            <h4 class="text-brand-amber font-bold uppercase tracking-[0.4em] text-[10px] mb-4">Select Your Path</h4>
+            <h1 class="text-5xl md:text-6xl font-extrabold text-brand-ink tracking-tight mb-6 leading-tight">
+                SELECT YOUR <span class="text-brand-amber">PATH</span>
+            </h1>
+            <p class="text-brand-muted max-w-2xl mx-auto text-base md:text-lg leading-relaxed font-medium">
+                Structured learning paths designed by industry experts. Pick a domain and start mastering the technical interview loops.
             </p>
         </div>
     </div>
 
-    <div class="container mx-auto px-6 -mt-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Main Grid Workspace Section -->
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 -mt-10 relative z-10">
+        <!-- Optimized 3-Column Grid Layout with 12px Rounded-xl Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {% for topic in topics %}
-            <a href="{% url 'topic_questions' topic.slug %}" class="group relative flex flex-col justify-between h-80 rounded-[2.5rem] bg-white/[0.03] border border-white/10 p-8 transition-all duration-500 hover:bg-white/[0.06] hover:border-accent/50 hover:-translate-y-2">
+            <a href="{% url 'topic_questions' topic.slug %}" 
+               class="group relative flex flex-col justify-between min-h-[320px] rounded-xl bg-brand-surface border border-brand-ink/[0.08] p-8 transition-colors duration-300 hover:border-brand-amber overflow-hidden shadow-premium-sm">
                 
-                <div class="absolute top-8 right-8 text-7xl opacity-[0.03] group-hover:opacity-[0.08] group-hover:scale-110 transition-all duration-500">
+                <!-- Stylized Background Tech Icon watermark (Highly muted, no bright clutter) -->
+                <div class="absolute top-6 right-6 text-7xl opacity-[0.03] group-hover:scale-105 group-hover:text-brand-amber group-hover:opacity-[0.06] transition-all duration-300 pointer-events-none">
                     {{ topic.icon }}
                 </div>
 
-                <div class="relative z-10">
-                    <div class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl mb-6 group-hover:bg-accent group-hover:border-accent group-hover:text-white transition-all duration-500 shadow-xl">
+                <div class="relative z-10 flex-grow">
+                    <!-- Tech Icon Container (Reduced Rounded Corners to rounded-lg) -->
+                    <div class="w-14 h-14 rounded-lg bg-brand-canvas border border-brand-soft/40 flex items-center justify-center text-3xl mb-6 text-brand-ink shadow-premium-sm">
                         {{ topic.icon }}
                     </div>
-                    <h2 class="text-3xl font-bold text-white mb-2 tracking-tight">{{ topic.name }}</h2>
-                    <p class="text-slate-500 text-sm line-clamp-2">
-                        Comprehensive practice covering {{ topic.questions.count }} essential concepts and interview patterns.
+                    <h2 class="text-2xl font-extrabold text-brand-ink mb-3 tracking-tight group-hover:text-brand-amber transition-colors duration-300">{{ topic.name }}</h2>
+                    <p class="text-brand-muted text-sm leading-relaxed line-clamp-3 font-medium opacity-90">
+                        Comprehensive roadmap covering {{ topic.questions.count }} essential concepts and structural engineering patterns.
                     </p>
                 </div>
 
-                <div class="relative z-10 flex items-center justify-between mt-8">
-                    <div class="flex flex-col">
-                        <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Questions</span>
-                        <span class="text-white font-bold">{{ topic.questions.count }} Problems</span>
+                <!-- Footer Navigation Strip (Strict py-2 Spacing & Minimal Rounded Corners) -->
+                <div class="relative z-10 flex items-center justify-between mt-8 pt-6 border-t border-brand-ink/[0.06]">
+                    <div class="flex flex-col py-2">
+                        <span class="text-[9px] font-bold text-brand-muted/60 uppercase tracking-widest">Questions</span>
+                        <span class="text-brand-ink font-extrabold text-sm">{{ topic.questions.count }} Problems</span>
                     </div>
                     
-                    <div class="h-12 w-12 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all">
-                        <i class="fas fa-arrow-right"></i>
+                    <div class="h-10 w-10 rounded-lg bg-brand-canvas flex items-center justify-center text-brand-muted group-hover:bg-brand-amber group-hover:text-brand-surface transition-colors duration-300 shadow-premium-sm">
+                        <i class="fas fa-arrow-right text-xs"></i>
                     </div>
                 </div>
-
-                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </a>
             {% endfor %}
 
@@ -61,4 +69,14 @@
     </div>
     
 </div>
+
+<style>
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+</style>
 {% endblock %}

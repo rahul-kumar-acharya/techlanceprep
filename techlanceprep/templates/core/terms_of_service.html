@@ -12,42 +12,58 @@
 {% block twitter_description %}Review the TechlancePrep Terms of Service. Understand the operational protocols, intellectual property rights, and user conduct guidelines for our coding labs and technical interview modules.{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-[#0B0F1A] pb-24 text-slate-400">
-    <div class="relative py-20 border-b border-white/5 overflow-hidden">
-        <div class="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_30%,_rgba(59,130,246,0.03),transparent)] pointer-events-none"></div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <h4 class="text-blue-500 font-black uppercase tracking-[0.4em] text-[10px] mb-4">User Agreement</h4>
-            <h1 class="text-5xl font-black text-white tracking-tighter mb-6">TERMS OF <span class="text-blue-500">SERVICE</span></h1>
-            <p class="max-w-2xl mx-auto text-slate-500">By accessing the Command Center, you agree to the following operational protocols.</p>
+<div class="min-h-screen bg-brand-canvas pb-24 text-brand-muted">
+    <!-- Header Banner Area -->
+    <div class="relative py-20 border-b border-brand-ink/[0.04] overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(#f97316/[0.012]_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-amber/5 via-transparent to-transparent opacity-70 pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 text-center relative z-10">
+            <h4 class="text-brand-amber font-bold uppercase tracking-[0.4em] text-[10px] mb-4">User Agreement</h4>
+            <h1 class="text-5xl font-extrabold text-brand-ink tracking-tight mb-6">TERMS OF <span class="text-brand-muted font-bold opacity-80">SERVICE</span></h1>
+            <p class="max-w-2xl mx-auto text-brand-muted/80 text-sm">By accessing the Command Center, you agree to the following operational protocols.</p>
         </div>
     </div>
 
-    <div class="container mx-auto px-6 mt-16 max-w-4xl">
-        <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-10 md:p-16 space-y-12 leading-relaxed">
-            
-            <section>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                    <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span> 01. Acceptance of Terms
+    <!-- Main Content Container (Spacious Width & Padding Bounds) -->
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 mt-16 flex justify-center">
+        <div class="w-full max-w-4xl bg-brand-surface border border-brand-ink/[0.06] rounded-[2rem] p-10 md:p-16 space-y-12 leading-relaxed shadow-premium-md relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-72 h-72 bg-brand-amber/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Section 1 -->
+            <section class="relative z-10">
+                <h2 class="text-xl font-bold text-brand-ink mb-4 flex items-center gap-3">
+                    <span class="w-1.5 h-6 bg-brand-amber rounded-full"></span> 01. Acceptance of Terms
                 </h2>
-                <p>By registering an account on TechlancePrep, you acknowledge that you have read, understood, and agreed to be bound by these operational terms. These terms govern your use of our coding labs, technical core modules, and behavioral training.</p>
+                <p class="text-brand-muted text-sm md:text-base leading-relaxed">
+                    By registering an account on TechlancePrep, you acknowledge that you have read, understood, and agreed to be bound by these operational terms. These terms govern your use of our coding labs, technical core modules, and behavioral training architectures.
+                </p>
             </section>
 
-            <section>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                    <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span> 02. Intellectual Property
+            <!-- Section 2 -->
+            <section class="relative z-10">
+                <h2 class="text-xl font-bold text-brand-ink mb-4 flex items-center gap-3">
+                    <span class="w-1.5 h-6 bg-brand-amber rounded-full"></span> 02. Intellectual Property
                 </h2>
-                <p>All curriculum content, including logic challenges, system design patterns, and proprietary behavioral frameworks, are the intellectual property of TechlancePrep. Users are granted a limited, non-exclusive license to use these materials for personal career preparation only.</p>
+                <p class="text-brand-muted text-sm md:text-base leading-relaxed">
+                    All curriculum content, including logic challenges, system design patterns, and proprietary behavioral frameworks, are the intellectual property of TechlancePrep. Users are granted a limited, non-exclusive license to use these materials for personal career preparation only.
+                </p>
             </section>
 
-            <section>
-                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                    <span class="w-1.5 h-6 bg-blue-500 rounded-full"></span> 03. User Conduct
+            <!-- Section 3 -->
+            <section class="relative z-10">
+                <h2 class="text-xl font-bold text-brand-ink mb-4 flex items-center gap-3">
+                    <span class="w-1.5 h-6 bg-brand-amber rounded-full"></span> 03. User Conduct
                 </h2>
-                <p>Users must not attempt to scrape, reverse engineer, or disrupt the platform's efficiency. Automated access to the questions via bots or scripts without explicit authorization is strictly prohibited.</p>
+                <p class="text-brand-muted text-sm md:text-base leading-relaxed">
+                    Users must not attempt to scrape, reverse engineer, or disrupt the platform's execution efficiency. Automated access to the questions via bots or scripts without explicit developer authorization is strictly prohibited.
+                </p>
             </section>
 
-            <section class="bg-blue-500/5 border border-blue-500/10 p-6 rounded-2xl italic">
-                <p class="text-sm">Note: TechlancePrep is a training tool. While we provide high-intensity preparation, we do not guarantee specific employment outcomes with external organizations.</p>
+            <!-- Premium Info Notice Block (Strictly py-4 / py-2 friendly equivalent spacing) -->
+            <section class="relative z-10 bg-brand-canvas border border-brand-soft/60 p-6 rounded-2xl italic text-brand-muted shadow-premium-sm text-xs md:text-sm leading-relaxed flex items-start gap-3">
+                <i class="fas fa-circle-info text-brand-amber mt-0.5 flex-shrink-0"></i>
+                <p>Note: TechlancePrep is an advanced training environment. While we provide high-intensity preparation, we do not guarantee specific employment outcomes with external organizations.</p>
             </section>
         </div>
     </div>

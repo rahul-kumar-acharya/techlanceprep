@@ -1,121 +1,126 @@
 {% extends 'base.html' %}
 
-{% block meta_title %}Command Center | Technical Interview Progress Tracking{% endblock %}
+{% block meta_title %}Your Career Preparation Command Center | TechlancePrep{% endblock %}
 
-{% block meta_description %}Monitor your technical mastery and interview preparation efficiency in the TechlancePrep Command Center. Analyze your curriculum progress, track resolved challenges, and manage your saved training units.{% endblock %}
+{% block meta_description %}Track your software engineering interview progress, technical strengths, curriculum completion rates, and master behavioral / coding goals on TechlancePrep.{% endblock %}
 
 {% block meta_keywords %}interview progress tracker, coding challenge analytics, technical mastery dashboard, DSA practice stats, TechlancePrep dashboard{% endblock %}
 
 {% block content %}
-<div class="min-h-screen bg-[#0B0F1A] pb-24 text-slate-300">
-    
-    <div class="relative py-12 border-b border-white/5 overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_50%,_rgba(0,255,153,0.05),transparent)] pointer-events-none"></div>
-        <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="min-h-screen bg-brand-canvas pb-24 relative overflow-hidden text-brand-muted">
+    <div class="absolute inset-0 bg-[radial-gradient(#f97316/[0.015]_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-amber/5 via-transparent to-transparent opacity-70 pointer-events-none"></div>
+
+    <div class="relative py-12 border-b border-brand-ink/[0.04] overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-                <h4 class="text-accent font-black uppercase tracking-[0.4em] text-[10px] mb-2">User Workspace</h4>
-                <h1 class="text-4xl font-black text-white tracking-tighter">
-                    COMMAND <span class="text-accent">CENTER</span>
+                <h4 class="text-brand-amber font-bold uppercase tracking-[0.4em] text-[10px] mb-2">User Workspace</h4>
+                <h1 class="text-4xl font-extrabold text-brand-ink tracking-tight">
+                    COMMAND <span class="text-brand-amber">CENTER</span>
                 </h1>
             </div>
-            <div class="flex items-center gap-3 bg-white/5 border border-white/10 p-2 rounded-2xl backdrop-blur-md">
-                <div class="px-4 py-2 bg-accent/10 border border-accent/20 rounded-xl">
-                    <span class="text-xs font-black text-accent uppercase tracking-widest">Efficiency:</span>
-                    <span class="text-white font-bold ml-2">{{ progress }}%</span>
+            <div class="flex items-center gap-3 bg-brand-surface border border-brand-ink/[0.08] p-2 rounded-xl shadow-premium-sm">
+                <div class="px-4 py-2 bg-brand-amberLight border border-brand-amber/20 rounded-lg">
+                    <span class="text-xs font-bold text-brand-amber uppercase tracking-widest">Efficiency:</span>
+                    <span class="text-brand-ink font-extrabold ml-2">{{ progress }}%</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container mx-auto px-6 mt-12">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 mt-12">
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <div class="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 hover:border-white/20 transition-all group">
+            <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-8 hover:border-brand-amber transition-colors duration-300 shadow-premium-sm">
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                    <div class="w-12 h-12 rounded-lg bg-brand-canvas border border-brand-soft/40 flex items-center justify-center text-brand-ink">
                         <i class="fas fa-terminal"></i>
                     </div>
-                    <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest italic">Inventory</span>
+                    <span class="text-[9px] font-bold text-brand-muted/60 uppercase tracking-widest italic">Inventory</span>
                 </div>
-                <p class="text-4xl font-black text-white">{{ total_questions }}</p>
-                <p class="text-sm text-slate-500 font-medium mt-1">Available Units</p>
+                <p class="text-4xl font-extrabold text-brand-ink tracking-tight">{{ total_questions }}</p>
+                <p class="text-xs text-brand-muted font-bold mt-1 uppercase tracking-wider">Available Units</p>
             </div>
 
-            <div class="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 hover:border-emerald-500/30 transition-all group">
+            <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-8 hover:border-brand-amber transition-colors duration-300 shadow-premium-sm">
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                    <div class="w-12 h-12 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
                         <i class="fas fa-check-double"></i>
                     </div>
-                    <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest italic">Resolved</span>
+                    <span class="text-[9px] font-bold text-brand-muted/60 uppercase tracking-widest italic">Resolved</span>
                 </div>
-                <p class="text-4xl font-black text-white">{{ completed_count }}</p>
-                <p class="text-sm text-slate-500 font-medium mt-1">Units Mastered</p>
+                <p class="text-4xl font-extrabold text-brand-ink tracking-tight">{{ completed_count }}</p>
+                <p class="text-xs text-brand-muted font-bold mt-1 uppercase tracking-wider">Units Mastered</p>
             </div>
 
-            <div class="bg-white/[0.03] border border-white/10 rounded-[2rem] p-8 hover:border-amber-500/30 transition-all group">
+            <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-8 hover:border-brand-amber transition-colors duration-300 shadow-premium-sm">
                 <div class="flex justify-between items-start mb-4">
-                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:scale-110 transition-transform">
+                    <div class="w-12 h-12 rounded-lg bg-brand-amberLight border border-brand-amber/20 flex items-center justify-center text-brand-amber">
                         <i class="fas fa-bookmark"></i>
                     </div>
-                    <span class="text-[10px] font-black text-slate-500 uppercase tracking-widest italic">Saved</span>
+                    <span class="text-[9px] font-bold text-brand-muted/60 uppercase tracking-widest italic">Saved</span>
                 </div>
-                <p class="text-4xl font-black text-white">{{ bookmark_count }}</p>
-                <p class="text-sm text-slate-500 font-medium mt-1">Flagged Challenges</p>
+                <p class="text-4xl font-extrabold text-brand-ink tracking-tight">{{ bookmark_count }}</p>
+                <p class="text-xs text-brand-muted font-bold mt-1 uppercase tracking-wider">Flagged Challenges</p>
             </div>
 
-            <div class="bg-accent rounded-[2rem] p-8 shadow-accent-glow text-white group">
-                <div class="flex justify-between items-start mb-4 text-white/80">
-                    <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-white">
+            <div class="bg-brand-ink border border-brand-ink rounded-xl p-8 text-brand-surface relative overflow-hidden shadow-premium-md">
+                <div class="absolute -top-10 -right-10 w-28 h-28 bg-brand-amber/10 rounded-full blur-xl pointer-events-none"></div>
+                <div class="flex justify-between items-start mb-4 text-brand-surface/70">
+                    <div class="w-12 h-12 rounded-lg bg-brand-surface/10 border border-brand-surface/10 flex items-center justify-center text-brand-amber">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <span class="text-[10px] font-black uppercase tracking-widest italic">Score</span>
+                    <span class="text-[9px] font-bold uppercase tracking-widest italic">Score</span>
                 </div>
-                <p class="text-4xl font-black">{{ progress }}%</p>
-                <div class="mt-4 h-1.5 w-full bg-white/20 rounded-full overflow-hidden">
-                    <div class="h-full bg-white" style="width: {{ progress }}%"></div>
+                <p class="text-4xl font-extrabold text-brand-surface tracking-tight">{{ progress }}%</p>
+                <div class="mt-4 h-1.5 w-full bg-brand-surface/20 rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-amber" data-width="{{ progress }}"></div>
                 </div>
             </div>
         </div>
 
-        <div class="grid lg:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             
             <div class="lg:col-span-2 space-y-8">
-                <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-10">
-                    <h2 class="text-xl font-bold text-white mb-8 flex items-center gap-3">
-                        <span class="w-2 h-8 bg-accent rounded-full"></span>
+                <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-8 md:p-10 shadow-premium-sm">
+                    <h2 class="text-xl font-bold text-brand-ink mb-8 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-brand-amber rounded-full"></span>
                         Curriculum Mastery
                     </h2>
                     
-                    <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                         {% for topic in topics_progress %}
-                        <div class="space-y-3">
+                        <div class="space-y-3 py-2">
                             <div class="flex justify-between items-end">
-                                <span class="text-sm font-bold text-slate-300">{{ topic.topic.icon }} {{ topic.topic.name }}</span>
-                                <span class="text-[10px] font-black text-slate-500 uppercase">{{ topic.completed }}/{{ topic.total }}</span>
+                                <span class="text-sm font-bold text-brand-ink">{{ topic.topic.icon }} {{ topic.topic.name }}</span>
+                                <span class="text-[10px] font-bold text-brand-muted/60 uppercase tracking-wider">{{ topic.completed }}/{{ topic.total }}</span>
                             </div>
-                            <div class="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5">
-                                <div class="h-full bg-gradient-to-r from-accent/50 to-accent rounded-full shadow-accent-glow" style="width: {{ topic.percent }}%"></div>
+                            <div class="h-2 w-full bg-brand-canvas rounded-full overflow-hidden border border-brand-soft/30">
+                                <div class="h-full bg-brand-amber rounded-full" data-width="{{ topic.percent }}"></div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
 
-                <div class="bg-white/[0.02] border border-white/5 rounded-[2.5rem] p-10">
-                    <h2 class="text-xl font-bold text-white mb-8">Intensity Analysis</h2>
+                <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-8 md:p-10 shadow-premium-sm">
+                    <h2 class="text-xl font-bold text-brand-ink mb-8 flex items-center gap-3">
+                        <span class="w-1.5 h-6 bg-brand-amber rounded-full"></span>
+                        Intensity Analysis
+                    </h2>
                     <div class="space-y-6">
                         {% for diff, stats in difficulty_stats.items %}
                         <div class="flex items-center gap-6">
-                            <div class="w-20 text-[10px] font-black uppercase tracking-widest 
-                                {% if diff == 'Easy' %}text-emerald-500{% elif diff == 'Medium' %}text-amber-500{% else %}text-rose-500{% endif %}">
+                            <div class="w-20 text-[10px] font-bold uppercase tracking-widest 
+                                {% if diff == 'Easy' %}text-emerald-600{% elif diff == 'Medium' %}text-brand-amber{% else %}text-rose-600{% endif %}">
                                 {{ diff }}
                             </div>
-                            <div class="flex-1 h-4 bg-white/5 rounded-lg overflow-hidden flex items-center px-1">
-                                <div class="h-1.5 rounded-full shadow-lg
-                                    {% if diff == 'Easy' %}bg-emerald-500{% elif diff == 'Medium' %}bg-amber-500{% else %}bg-rose-500{% endif %}" 
-                                    style="width: {{ stats.percent }}%"></div>
+                            <div class="flex-1 h-4 bg-brand-canvas rounded-lg overflow-hidden flex items-center px-1 border border-brand-soft/30">
+                                <div class="h-1.5 rounded-full 
+                                    {% if diff == 'Easy' %}bg-emerald-500{% elif diff == 'Medium' %}bg-brand-amber{% else %}bg-rose-500{% endif %}" 
+                                    data-width="{{ stats.percent }}"></div>
                             </div>
-                            <div class="w-12 text-right text-xs font-bold text-white">{{ stats.percent }}%</div>
+                            <div class="w-12 text-right text-xs font-bold text-brand-ink">{{ stats.percent }}%</div>
                         </div>
                         {% endfor %}
                     </div>
@@ -123,27 +128,27 @@
             </div>
 
             <div class="space-y-8">
-                <div class="bg-white/[0.03] border border-white/10 rounded-[2.5rem] p-8 h-full">
-                    <h2 class="text-xl font-bold text-white mb-8">Recent Logs</h2>
+                <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-8 shadow-premium-sm">
+                    <h2 class="text-xl font-bold text-brand-ink mb-8">Recent Logs</h2>
                     
-                    <div class="space-y-6 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-white/10">
+                    <div class="space-y-6 relative before:absolute before:left-[19px] before:top-2 before:bottom-2 before:w-px before:bg-brand-soft/60">
                         {% for completed in recent_completed %}
                         <div class="relative pl-12 group">
-                            <div class="absolute left-0 top-1 w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 z-10 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                            <div class="absolute left-0 top-0.5 w-10 h-10 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 z-10 transition-colors shadow-premium-sm">
                                 <i class="fas fa-check text-xs"></i>
                             </div>
-                            <p class="text-sm font-bold text-white truncate">{{ completed.question.title }}</p>
-                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-tighter mt-1">Mastered {{ completed.completed_at|timesince }} ago</p>
+                            <p class="text-sm font-bold text-brand-ink truncate pr-2">{{ completed.question.title }}</p>
+                            <p class="text-[9px] text-brand-muted/70 uppercase font-bold tracking-wider mt-1.5">Mastered {{ completed.completed_at|timesince }} ago</p>
                         </div>
                         {% endfor %}
 
                         {% for bookmark in recent_bookmarks %}
                         <div class="relative pl-12 group">
-                            <div class="absolute left-0 top-1 w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 z-10 group-hover:bg-amber-500 group-hover:text-white transition-all">
+                            <div class="absolute left-0 top-0.5 w-10 h-10 rounded-lg bg-brand-amberLight border border-brand-amber/20 flex items-center justify-center text-brand-amber z-10 transition-colors shadow-premium-sm">
                                 <i class="fas fa-bookmark text-xs"></i>
                             </div>
-                            <p class="text-sm font-bold text-white truncate">{{ bookmark.question.title }}</p>
-                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-tighter mt-1">Flagged {{ bookmark.created_at|timesince }} ago</p>
+                            <p class="text-sm font-bold text-brand-ink truncate pr-2">{{ bookmark.question.title }}</p>
+                            <p class="text-[9px] text-brand-muted/70 uppercase font-bold tracking-wider mt-1.5">Flagged {{ bookmark.created_at|timesince }} ago</p>
                         </div>
                         {% endfor %}
                     </div>
@@ -151,11 +156,11 @@
             </div>
         </div>
 
-        <div class="mt-12 bg-gradient-to-br from-accent/20 to-blue-600/20 border border-white/10 rounded-[3rem] p-12 text-center relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px] -mr-32 -mt-32"></div>
-            <h2 class="text-3xl font-black text-white mb-4">READY TO ASCEND?</h2>
-            <p class="text-slate-400 mb-8 max-w-lg mx-auto">Don't break your streak. High-growth roles require consistent technical discipline.</p>
-            <a href="{% url 'all_topics' %}" class="inline-block px-10 py-4 bg-white text-black font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-accent hover:text-white transition-all shadow-xl">
+        <div class="mt-12 bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-12 text-center relative overflow-hidden shadow-premium-md">
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-brand-amber/5 rounded-full blur-3xl pointer-events-none"></div>
+            <h2 class="text-3xl font-extrabold text-brand-ink mb-4 tracking-tight">READY TO ASCEND?</h2>
+            <p class="text-brand-muted mb-8 max-w-lg mx-auto font-medium">Don't break your target velocity streak. High-growth roles require consistent technical discipline.</p>
+            <a href="{% url 'all_topics' %}" class="inline-block px-10 py-3.5 bg-brand-ink hover:bg-brand-amber text-brand-surface font-bold text-xs uppercase tracking-widest rounded-lg transition-colors duration-300 shadow-premium-sm">
                 Resume Training
             </a>
         </div>
@@ -163,4 +168,15 @@
     </div>
 
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Dynamically apply widths from data-width properties to avoid CSS parser warnings in templates
+        document.querySelectorAll('[data-width]').forEach(el => {
+            el.style.width = el.getAttribute('data-width') + '%';
+        });
+    });
+</script>
 {% endblock %}
