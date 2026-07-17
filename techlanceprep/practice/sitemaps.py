@@ -20,10 +20,9 @@ class TopicSitemap(Sitemap):
     def items(self):
         return Topic.objects.all().order_by('name')
 
-
 class QuestionSitemap(Sitemap):
     priority = 1.0
     changefreq = 'daily'
 
     def items(self):
-        return Question.objects.all().order_by('title')
+        return Question.objects.all().select_related('topic').order_by('title')
