@@ -189,44 +189,106 @@
     });
 
     // --- Dynamic AJAX Interactions (Synchronized with Cyber Amber theme parameters) ---
-    
+
+    function setButtonPending(button, isPending) {
+        if (!button) {
+            return;
+        }
+
+        button.disabled = isPending;
+        button.classList.toggle('opacity-60', isPending);
+        button.classList.toggle('cursor-wait', isPending);
+    }
+
     function toggleBookmark(questionId){
         const btn = document.getElementById(`bookmark-btn-${questionId}`);
+        if (!btn || btn.disabled) {
+            return;
+        }
+
         const icon = btn.querySelector('i');
+        setButtonPending(btn, true);
+
         fetch('{% url "toggle_bookmark" %}', {
             method:'POST',
             headers: {'X-CSRFToken':'{{ csrf_token }}','Content-Type':'application/x-www-form-urlencoded'},
-            body:'question_id=' + questionId
-        }).then(r=>r.json()).then(data=>{
-            if(data.status==='added'){
-                btn.classList.add('bg-brand-amberLight','text-brand-amber','border-brand-amber/30');
-                btn.classList.remove('bg-brand-canvas','text-brand-muted/50','border-brand-soft/40');
-                icon.classList.replace('far','fas');
-            } else {
-                btn.classList.remove('bg-brand-amberLight','text-brand-amber','border-brand-amber/30');
-                btn.classList.add('bg-brand-canvas','text-brand-muted/50','border-brand-soft/40');
-                icon.classList.replace('fas','far');
+            body:'question_id=' + encodeURIComponent(questionId)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Bookmark request failed');
             }
+            return response.json();
+        })
+        .then(data => {
+            const isAdded = data.status === 'added';
+
+            btn.classList.toggle('bg-brand-amberLight', isAdded);
+            btn.classList.toggle('text-brand-amber', isAdded);
+            btn.classList.toggle('border-brand-amber/30', isAdded);
+
+            btn.classList.toggle('bg-brand-canvas', !isAdded);
+            btn.classList.toggle('text-brand-muted/50', !isAdded);
+            btn.classList.toggle('border-brand-soft/60', !isAdded);
+            btn.classList.toggle('hover:border-brand-amber', !isAdded);
+            btn.classList.toggle('hover:text-brand-amber', !isAdded);
+
+            if (icon) {
+                icon.classList.toggle('fas', isAdded);
+                icon.classList.toggle('far', !isAdded);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+        .finally(() => {
+            setButtonPending(btn, false);
         });
     }
 
     function toggleComplete(questionId){
         const btn = document.getElementById(`complete-btn-${questionId}`);
+        if (!btn || btn.disabled) {
+            return;
+        }
+
         const icon = btn.querySelector('i');
+        setButtonPending(btn, true);
+
         fetch('{% url "toggle_complete" %}', {
             method:'POST',
             headers: {'X-CSRFToken':'{{ csrf_token }}','Content-Type':'application/x-www-form-urlencoded'},
-            body:'question_id=' + questionId
-        }).then(r=>r.json()).then(data=>{
-            if(data.status==='added'){
-                btn.classList.add('bg-emerald-50','text-emerald-600','border-emerald-200');
-                btn.classList.remove('bg-brand-canvas','text-brand-muted/50','border-brand-soft/40');
-                icon.classList.replace('far','fas');
-            } else {
-                btn.classList.remove('bg-emerald-50','text-emerald-600','border-emerald-200');
-                btn.classList.add('bg-brand-canvas','text-brand-muted/50','border-brand-soft/40');
-                icon.classList.replace('fas','far');
+            body:'question_id=' + encodeURIComponent(questionId)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Completion request failed');
             }
+            return response.json();
+        })
+        .then(data => {
+            const isAdded = data.status === 'added';
+
+            btn.classList.toggle('bg-emerald-50', isAdded);
+            btn.classList.toggle('text-emerald-600', isAdded);
+            btn.classList.toggle('border-emerald-200', isAdded);
+
+            btn.classList.toggle('bg-brand-canvas', !isAdded);
+            btn.classList.toggle('text-brand-muted/50', !isAdded);
+            btn.classList.toggle('border-brand-soft/60', !isAdded);
+            btn.classList.toggle('hover:border-emerald-500', !isAdded);
+            btn.classList.toggle('hover:text-emerald-600', !isAdded);
+
+            if (icon) {
+                icon.classList.toggle('fas', isAdded);
+                icon.classList.toggle('far', !isAdded);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+        .finally(() => {
+            setButtonPending(btn, false);
         });
     }
 </script>

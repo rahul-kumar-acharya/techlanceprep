@@ -79,11 +79,13 @@
                     <div class="flex gap-3 shrink-0">
                         {% if user.is_authenticated %}
                         <button onclick="toggleBookmark('{{ question.id }}')"
+                            id="bookmark-btn"
                             class="w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-300 border {% if is_bookmarked %}bg-brand-amberLight text-brand-amber border-brand-amber/30{% else %}bg-brand-canvas text-brand-muted/50 border-brand-soft/60 hover:border-brand-amber hover:text-brand-amber shadow-premium-sm{% endif %}"
                             title="Bookmark Challenge">
                             <i class="{% if is_bookmarked %}fas{% else %}far{% endif %} fa-bookmark text-base"></i>
                         </button>
                         <button onclick="toggleComplete('{{ question.id }}')"
+                            id="complete-btn"
                             class="w-12 h-12 flex items-center justify-center rounded-lg transition-colors duration-300 border {% if is_completed %}bg-emerald-50 text-emerald-600 border-emerald-200{% else %}bg-brand-canvas text-brand-muted/50 border-brand-soft/60 hover:border-emerald-500 hover:text-emerald-600 shadow-premium-sm{% endif %}"
                             title="Mark as Solved">
                             <i class="{% if is_completed %}fas{% else %}far{% endif %} fa-check-circle text-base"></i>
@@ -142,10 +144,10 @@
                     <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-8 shadow-premium-sm">
                         <h3 class="text-brand-muted/60 text-[10px] font-bold uppercase tracking-widest mb-6 text-center">Your Progress</h3>
                         <div class="flex flex-col items-center gap-4">
-                            <div class="w-20 h-20 rounded-full border-2 {% if is_completed %}border-emerald-500 bg-emerald-50/30{% else %}border-brand-soft/60{% endif %} flex items-center justify-center transition-all duration-500">
-                                <i class="fas fa-check-circle text-3xl {% if is_completed %}text-emerald-500{% else %}text-brand-soft/40{% endif %}"></i>
+                            <div id="progress-ring" class="w-20 h-20 rounded-full border-2 {% if is_completed %}border-emerald-500 bg-emerald-50/30{% else %}border-brand-soft/60{% endif %} flex items-center justify-center transition-all duration-500">
+                                <i id="progress-icon" class="fas fa-check-circle text-3xl {% if is_completed %}text-emerald-500{% else %}text-brand-soft/40{% endif %}"></i>
                             </div>
-                            <p class="text-brand-ink font-bold text-sm">{% if is_completed %}Mission Accomplished{% else %}Pending Completion{% endif %}</p>
+                            <p id="progress-text" class="text-brand-ink font-bold text-sm">{% if is_completed %}Mission Accomplished{% else %}Pending Completion{% endif %}</p>
                         </div>
                     </div>
 
@@ -196,34 +198,149 @@
 
 {% block extra_js %}
 <script>
-    // System AJAX logic optimized to mirror local templates safely
+    function setButtonPending(button, isPending) {
+        if (!button) {
+            return;
+        }
+
+        button.disabled = isPending;
+        button.classList.toggle('opacity-60', isPending);
+        button.classList.toggle('cursor-wait', isPending);
+    }
+
+    function updateBookmarkUI(status) {
+        const btn = document.getElementById('bookmark-btn');
+        if (!btn) {
+            return;
+        }
+
+        const icon = btn.querySelector('i');
+        const isAdded = status === 'added';
+
+        btn.classList.toggle('bg-brand-amberLight', isAdded);
+        btn.classList.toggle('text-brand-amber', isAdded);
+        btn.classList.toggle('border-brand-amber/30', isAdded);
+
+        btn.classList.toggle('bg-brand-canvas', !isAdded);
+        btn.classList.toggle('text-brand-muted/50', !isAdded);
+        btn.classList.toggle('border-brand-soft/60', !isAdded);
+        btn.classList.toggle('hover:border-brand-amber', !isAdded);
+        btn.classList.toggle('hover:text-brand-amber', !isAdded);
+        btn.classList.toggle('shadow-premium-sm', !isAdded);
+
+        if (icon) {
+            icon.classList.toggle('fas', isAdded);
+            icon.classList.toggle('far', !isAdded);
+        }
+    }
+
+    function updateCompleteUI(status) {
+        const btn = document.getElementById('complete-btn');
+        const ring = document.getElementById('progress-ring');
+        const ringIcon = document.getElementById('progress-icon');
+        const progressText = document.getElementById('progress-text');
+
+        const isAdded = status === 'added';
+
+        if (btn) {
+            const icon = btn.querySelector('i');
+
+            btn.classList.toggle('bg-emerald-50', isAdded);
+            btn.classList.toggle('text-emerald-600', isAdded);
+            btn.classList.toggle('border-emerald-200', isAdded);
+
+            btn.classList.toggle('bg-brand-canvas', !isAdded);
+            btn.classList.toggle('text-brand-muted/50', !isAdded);
+            btn.classList.toggle('border-brand-soft/60', !isAdded);
+            btn.classList.toggle('hover:border-emerald-500', !isAdded);
+            btn.classList.toggle('hover:text-emerald-600', !isAdded);
+            btn.classList.toggle('shadow-premium-sm', !isAdded);
+
+            if (icon) {
+                icon.classList.toggle('fas', isAdded);
+                icon.classList.toggle('far', !isAdded);
+            }
+        }
+
+        if (ring) {
+            ring.classList.toggle('border-emerald-500', isAdded);
+            ring.classList.toggle('bg-emerald-50/30', isAdded);
+            ring.classList.toggle('border-brand-soft/60', !isAdded);
+        }
+
+        if (ringIcon) {
+            ringIcon.classList.toggle('text-emerald-500', isAdded);
+            ringIcon.classList.toggle('text-brand-soft/40', !isAdded);
+        }
+
+        if (progressText) {
+            progressText.textContent = isAdded ? 'Mission Accomplished' : 'Pending Completion';
+        }
+    }
+
     function toggleBookmark(questionId) {
+        const btn = document.getElementById('bookmark-btn');
+        if (btn && btn.disabled) {
+            return;
+        }
+
+        setButtonPending(btn, true);
+
         fetch('{% url "toggle_bookmark" %}', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': '{{ csrf_token }}',
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: 'question_id=' + questionId
+            body: 'question_id=' + encodeURIComponent(questionId)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Bookmark request failed');
+            }
+            return response.json();
+        })
         .then(data => {
-            location.reload();
+            updateBookmarkUI(data.status);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+        .finally(() => {
+            setButtonPending(btn, false);
         });
     }
 
     function toggleComplete(questionId) {
+        const btn = document.getElementById('complete-btn');
+        if (btn && btn.disabled) {
+            return;
+        }
+
+        setButtonPending(btn, true);
+
         fetch('{% url "toggle_complete" %}', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': '{{ csrf_token }}',
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: 'question_id=' + questionId
+            body: 'question_id=' + encodeURIComponent(questionId)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Completion request failed');
+            }
+            return response.json();
+        })
         .then(data => {
-            location.reload();
+            updateCompleteUI(data.status);
+        })
+        .catch(error => {
+            console.error(error);
+        })
+        .finally(() => {
+            setButtonPending(btn, false);
         });
     }
 

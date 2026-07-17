@@ -24,6 +24,14 @@ def contact(request):
     return render(request, 'core/contact.html')
 
 
+def faq(request):
+    return render(request, 'core/faq.html')
+
+
+def pricing(request):
+    return render(request, 'core/pricing.html')
+
+
 def privacy_policy(request):
     return render(request, 'core/privacy_policy.html')
 

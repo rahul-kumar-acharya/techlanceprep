@@ -11,45 +11,57 @@
 {% block page_subtitle %}In-depth activity telemetry for entity: {{ view_user.username }}{% endblock %}
 
 {% block content %}
-<a href="{% url 'manage_users' %}" class="inline-flex items-center text-slate-500 hover:text-[#00ff99] mb-6 md:mb-8 group transition-colors text-[10px] font-black uppercase tracking-widest">
-    <i class="fas fa-chevron-left mr-2 group-hover:-translate-x-1 transition-transform"></i> Return to Directory
-</a>
+<nav class="flex items-center gap-2 mb-6 text-xs font-bold uppercase tracking-wider select-none">
+    <a href="{% url 'admin_dashboard' %}" class="text-brand-muted/50 hover:text-brand-amber transition-colors duration-200">
+        Admin Portal
+    </a>
+    <i class="fas fa-chevron-right text-[9px] text-brand-soft"></i>
+    <a href="{% url 'manage_users' %}" class="text-brand-muted/50 hover:text-brand-amber transition-colors duration-200">
+        User Directory
+    </a>
+    <i class="fas fa-chevron-right text-[9px] text-brand-soft"></i>
+    <span class="text-brand-ink">Profile: {{ view_user.username }}</span>
+</nav>
 
-<div class="bg-white/[0.02] border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 mb-8 md:mb-10 backdrop-blur-md shadow-2xl relative overflow-hidden">
-    <div class="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- Main User Overview Identity Card Container -->
+<div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-6 md:p-8 mb-8 shadow-premium-sm relative overflow-hidden select-none">
+    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-amber/40 to-transparent opacity-70"></div>
 
     <div class="flex flex-col md:flex-row items-center md:items-start lg:items-center gap-6 md:gap-8 relative z-10">
-        <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 bg-gradient-to-br from-[#00ff99]/20 to-blue-600/20 rounded-2xl md:rounded-3xl flex items-center justify-center text-[#00ff99] text-3xl md:text-4xl font-black border border-white/10 shadow-[inset_0_0_20px_rgba(0,255,153,0.1)]">
+        <!-- Initial Character Avatar Badge Frame -->
+        <div class="w-20 h-20 md:w-24 md:h-24 shrink-0 bg-brand-ink rounded-lg flex items-center justify-center text-brand-surface text-3xl md:text-4xl font-extrabold shadow-premium-md border border-brand-ink">
             {{ view_user.username|upper|slice:":1" }}
         </div>
         
-        <div class="flex-1 text-center md:text-left">
-            <h2 class="text-2xl md:text-3xl font-black text-white tracking-tighter">{{ view_user.username }}</h2>
-            <p class="text-slate-400 font-medium text-sm md:text-base break-all">{{ view_user.email }}</p>
+        <!-- User Context Description Array -->
+        <div class="flex-1 text-center md:text-left space-y-1">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-brand-ink tracking-tight">{{ view_user.username }}</h2>
+            <p class="text-brand-muted font-semibold text-sm md:text-base break-all select-all">{{ view_user.email }}</p>
             
-            <div class="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-3 mt-4">
-                <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                    <i class="fas fa-id-card text-[#00ff99]"></i>
-                    Joined {{ view_user.date_joined|date:"M d, Y" }}
+            <div class="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-2 pt-3">
+                <p class="text-brand-muted/60 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                    <i class="fas fa-id-card text-brand-amber text-sm"></i>
+                    <span>Joined {{ view_user.date_joined|date:"M. d, Y" }}</span>
                 </p>
-                <p class="text-slate-500 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                    <i class="fas fa-microchip text-blue-500"></i>
-                    Status: Verified
+                <p class="text-brand-muted/60 text-xs font-bold uppercase tracking-wider flex items-center gap-2">
+                    <i class="fas fa-circle-check text-emerald-600 text-sm"></i>
+                    <span>Status: Verified Access</span>
                 </p>
             </div>
         </div>
 
-        <div class="shrink-0 w-full md:w-auto mt-2 md:mt-0">
+        <!-- Privilege Node Classification Strip -->
+        <div class="shrink-0 w-full md:w-auto mt-2 md:mt-0 flex justify-center">
             {% if view_user.is_superuser %}
-                <div class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(245,158,11,0.1)] text-center">
+                <div class="bg-brand-amberLight text-brand-amber border border-brand-amber/30 px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider shadow-premium-sm">
                     Superuser_Root
                 </div>
             {% elif view_user.is_admin %}
-                <div class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-center">
+                <div class="bg-brand-ink text-brand-surface px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider shadow-premium-sm">
                     Admin_Access
                 </div>
             {% else %}
-                <div class="bg-white/5 text-slate-500 border border-white/10 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-[0.2em] text-center">
+                <div class="bg-brand-canvas border border-brand-soft text-brand-muted px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider shadow-premium-sm">
                     Standard_Node
                 </div>
             {% endif %}
@@ -57,24 +69,26 @@
     </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+<!-- Two Column Log Feed Split Section Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     
-    <div class="bg-white/[0.02] border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 backdrop-blur-sm">
-        <h3 class="text-xs font-black text-white uppercase tracking-[0.3em] mb-6 md:mb-8 flex items-center gap-3">
-            <span class="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse"></span>
+    <!-- Column Block Left: Saved Bookmarks Resources Panel -->
+    <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-6 md:p-8 shadow-premium-sm flex flex-col">
+        <h3 class="text-sm font-bold text-brand-ink uppercase tracking-wider mb-6 flex items-center gap-2.5 select-none">
+            <span class="w-2 h-2 bg-brand-amber rounded-full"></span>
             Saved Resources ({{ bookmarks.count }})
         </h3>
         
         {% if bookmarks %}
-            <div class="space-y-4">
+            <div class="space-y-4 flex-1">
                 {% for bookmark in bookmarks %}
-                <div class="group p-4 md:p-5 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-amber-500/30 transition-all">
-                    <p class="font-bold text-slate-200 group-hover:text-white transition-colors text-sm md:text-base">{{ bookmark.question.title }}</p>
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-3 gap-2">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <div class="group p-4 bg-brand-canvas border border-brand-soft/50 rounded-lg hover:border-brand-amber transition-colors duration-200">
+                    <p class="font-bold text-brand-ink group-hover:text-brand-amber transition-colors text-sm md:text-base leading-snug">{{ bookmark.question.title }}</p>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-3 gap-2 select-none">
+                        <span class="text-xs font-bold uppercase tracking-wide text-brand-muted/70">
                             {{ bookmark.question.topic.icon }} {{ bookmark.question.topic.name }}
                         </span>
-                        <span class="text-[9px] font-medium text-slate-600 italic">
+                        <span class="text-xs font-medium text-brand-muted/40 italic">
                             Saved {{ bookmark.created_at|date:"M d, Y" }}
                         </span>
                     </div>
@@ -82,29 +96,34 @@
                 {% endfor %}
             </div>
         {% else %}
-            <div class="text-center py-10">
-                <i class="fas fa-folder-open text-slate-800 text-4xl mb-4"></i>
-                <p class="text-slate-600 text-xs font-bold uppercase tracking-widest">No Bookmark Telemetry</p>
+            <!-- Empty Telemetry Frame Viewport -->
+            <div class="text-center py-12 flex-1 flex flex-col justify-center select-none">
+                <div class="w-12 h-12 bg-brand-canvas border border-brand-soft/60 rounded-lg flex items-center justify-center text-brand-muted/30 mx-auto mb-4 text-xl">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <p class="text-brand-muted/50 text-xs font-bold uppercase tracking-wide">No Bookmark Telemetry Logs</p>
             </div>
         {% endif %}
     </div>
     
-    <div class="bg-white/[0.02] border border-white/5 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-8 backdrop-blur-sm">
-        <h3 class="text-xs font-black text-white uppercase tracking-[0.3em] mb-6 md:mb-8 flex items-center gap-3">
-            <span class="w-1.5 h-1.5 bg-[#00ff99] rounded-full animate-pulse"></span>
+    <!-- Column Block Right: Operation Completed History Task Registry -->
+    <div class="bg-brand-surface border border-brand-ink/[0.08] rounded-xl p-6 md:p-8 shadow-premium-sm flex flex-col">
+        <h3 class="text-sm font-bold text-brand-ink uppercase tracking-wider mb-6 flex items-center gap-2.5 select-none">
+            <span class="w-2 h-2 bg-brand-ink rounded-full"></span>
             Operation History ({{ completions.count }})
         </h3>
         
         {% if completions %}
-            <div class="space-y-4">
+            <div class="space-y-4 flex-1">
                 {% for completion in completions %}
-                <div class="group p-4 md:p-5 bg-white/[0.02] border border-white/5 rounded-2xl hover:border-[#00ff99]/30 transition-all">
-                    <p class="font-bold text-slate-200 group-hover:text-white transition-colors text-sm md:text-base">{{ completion.question.title }}</p>
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-3 gap-2">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                <div class="group p-4 bg-brand-canvas border border-brand-soft/50 rounded-lg hover:border-brand-ink transition-colors duration-200">
+                    <p class="font-bold text-brand-ink transition-colors text-sm md:text-base leading-snug">{{ completion.question.title }}</p>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-3 gap-2 select-none">
+                        <span class="text-xs font-bold uppercase tracking-wide text-brand-muted/70">
                             {{ completion.question.topic.icon }} {{ completion.question.topic.name }}
                         </span>
-                        <span class="text-[9px] font-black uppercase text-[#00ff99]/60">
+                        <span class="text-xs font-bold uppercase text-emerald-600 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                             Success • {{ completion.completed_at|date:"M d, Y" }}
                         </span>
                     </div>
@@ -112,9 +131,12 @@
                 {% endfor %}
             </div>
         {% else %}
-            <div class="text-center py-10">
-                <i class="fas fa-ghost text-slate-800 text-4xl mb-4"></i>
-                <p class="text-slate-600 text-xs font-bold uppercase tracking-widest">No Completion Logs</p>
+            <!-- Empty Operations Logs Frame Viewport -->
+            <div class="text-center py-12 flex-1 flex flex-col justify-center select-none">
+                <div class="w-12 h-12 bg-brand-canvas border border-brand-soft/60 rounded-lg flex items-center justify-center text-brand-muted/30 mx-auto mb-4 text-xl">
+                    <i class="fas fa-ghost"></i>
+                </div>
+                <p class="text-brand-muted/50 text-xs font-bold uppercase tracking-wide">No Completion Activity Logs</p>
             </div>
         {% endif %}
     </div>

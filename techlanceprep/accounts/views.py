@@ -6,6 +6,9 @@ from .forms import UserRegistrationForm, UserLoginForm, ProfileUpdateForm
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -19,6 +22,9 @@ def register(request):
 
 
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == 'POST':
         # Create form with POST data
         form = UserLoginForm(request.POST)

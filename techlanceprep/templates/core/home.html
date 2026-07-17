@@ -10,38 +10,82 @@
 {% block og_description %}TechlancePrep is the ultimate 100% free platform for software engineers. Master Data Structures (DSA), System Design, and modern frameworks with curated roadmaps, real-time tracking, and FAANG-level interview questions.{% endblock %}
 {% block twitter_title %}TechlancePrep | Free Technical Interview Prep, DSA & System Design{% endblock %}
 {% block twitter_description %}TechlancePrep is the ultimate 100% free platform for software engineers. Master Data Structures (DSA), System Design, and modern frameworks with curated roadmaps, real-time tracking, and FAANG-level interview questions.{% endblock %}
+{% block og_image %}{{ request.scheme }}://{{ request.get_host }}/static/images/og-image.png{% endblock %}
+{% block twitter_image %}{{ request.scheme }}://{{ request.get_host }}/static/images/og-image.png{% endblock %}
 
 {% block schema_markup %}
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "TechlancePrep",
-  "url": "{{ request.scheme }}://{{ request.get_host }}",
-  "description": "TechlancePrep is the ultimate 100% free platform for software engineers to master Data Structures (DSA), System Design, Frontend Mastery, and Backend development questions curated by experts.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "{{ request.scheme }}://{{ request.get_host }}/practice/?q={search_term_string}"
-    },
-    "query-input": "required name=search_term_string"
-  }
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "TechlancePrep",
+    "url": "{{ request.scheme }}://{{ request.get_host }}",
+    "description": "TechlancePrep is the ultimate 100% free platform for software engineers to master Data Structures (DSA), System Design, Frontend Mastery, and Backend development questions curated by experts.",
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "{{ request.scheme }}://{{ request.get_host }}/practice/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+    }
 }
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "TechlancePrep",
-  "url": "{{ request.scheme }}://{{ request.get_host }}",
-  "logo": "{{ request.scheme }}://{{ request.get_host }}/static/images/og-image.png",
-  "sameAs": [
-    "https://acharyarahul.in",
-    "https://acharyaworks.in",
-    "https://github.com/rahul-kumar-acharya",
-    "https://www.linkedin.com/in/rahulkumaracharya/"
-  ]
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "TechlancePrep",
+    "url": "{{ request.scheme }}://{{ request.get_host }}",
+    "logo": "{{ request.scheme }}://{{ request.get_host }}/static/images/og-image.png",
+    "sameAs": [
+        "https://acharyarahul.in",
+        "https://acharyaworks.in",
+        "https://github.com/rahul-kumar-acharya",
+        "https://www.linkedin.com/in/rahulkumaracharya/"
+    ]
+}
+</script>
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "SiteNavigationElement",
+            "name": "Practice Curriculum Tracks",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'all_topics' %}"
+        },
+        {
+            "@type": "SiteNavigationElement",
+            "name": "User Dashboard & Telemetry",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'dashboard' %}"
+        },
+        {
+            "@type": "SiteNavigationElement",
+                "name": "Pricing Plans",
+                "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'pricing' %}"
+        },
+        {
+            "@type": "SiteNavigationElement",
+            "name": "Frequently Asked Questions",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'faq' %}"
+        },
+        {
+            "@type": "SiteNavigationElement",
+            "name": "About TechlancePrep",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'about' %}"
+        },
+        {
+            "@type": "SiteNavigationElement",
+            "name": "Contact Support Channels",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'contact' %}"
+        },
+        {
+            "@type": "SiteNavigationElement",
+            "name": "Secure Login Access",
+            "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'login' %}"
+        }
+    ]
 }
 </script>
 {% endblock %}
@@ -79,9 +123,15 @@
             <a href="{% url 'all_topics' %}" class="w-full sm:w-auto bg-brand-ink hover:bg-brand-amber text-brand-surface px-12 py-4 rounded-xl font-bold shadow-premium-sm transition-all transform hover:-translate-y-0.5 text-center">
                 Start Practicing
             </a>
-            <a href="{% url 'register' %}" class="w-full sm:w-auto bg-brand-surface hover:bg-brand-canvas border border-brand-soft text-brand-ink px-12 py-4 rounded-xl font-bold transition-all shadow-premium-sm text-center">
-                Join Community
-            </a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'dashboard' %}" class="w-full sm:w-auto bg-brand-surface hover:bg-brand-canvas border border-brand-soft text-brand-ink px-12 py-4 rounded-xl font-bold transition-all shadow-premium-sm text-center">
+                    Dashboard
+                </a>
+            {% else %}
+                <a href="{% url 'register' %}" class="w-full sm:w-auto bg-brand-surface hover:bg-brand-canvas border border-brand-soft text-brand-ink px-12 py-4 rounded-xl font-bold transition-all shadow-premium-sm text-center">
+                    Join Community
+                </a>
+            {% endif %}
         </div>
 
         <div class="mt-14 flex items-center justify-center gap-8 text-brand-muted text-sm font-semibold opacity-90">
