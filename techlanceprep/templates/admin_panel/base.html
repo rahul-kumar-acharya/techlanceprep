@@ -10,7 +10,7 @@
     <meta name="robots" content="noindex, nofollow, noarchive">
     <meta name="author" content="TechlancePrep Systems Admin">
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23f97316%22/><text y=%22.9em%22 font-size=%2270%22 x=%2210%22 fill=%22white%22 font-family=%22monospace%22 font-weight=%22bold%22>&gt;_</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -57,7 +57,7 @@
         }
     </style>
 </head>
-<body class="bg-brand-canvas h-full text-brand-muted overflow-hidden">
+<body class="bg-brand-canvas min-h-screen text-brand-muted lg:h-full lg:overflow-hidden">
 
     <!-- Premium Cybernetic Loading Page Overlay -->
     <div id="page-loader" class="fixed inset-0 bg-brand-canvas z-[9999] flex flex-col justify-center items-center transition-all duration-500">
@@ -144,7 +144,7 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-brand-ink/40 backdrop-blur-sm z-[40] hidden opacity-0 transition-opacity duration-300"></div>
 
     <!-- Desktop shell: top row + left rail + content area -->
-    <div class="h-full lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:grid-rows-[5rem_minmax(0,1fr)]">
+    <div class="min-h-screen lg:h-full lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:grid-rows-[5rem_minmax(0,1fr)]">
         <!-- Desktop top-left brand cell -->
         <div class="hidden lg:flex row-start-1 col-start-1 bg-brand-surface border-r border-b border-brand-soft items-center px-6 select-none">
             <a href="{% url 'admin_dashboard' %}" class="flex items-center gap-3 font-extrabold tracking-tight text-brand-ink text-base">
@@ -249,8 +249,8 @@
         </aside>
 
         <!-- Main content area -->
-        <div class="row-start-2 col-start-2 min-h-screen lg:min-h-0 flex flex-col overflow-hidden">
-            <main class="flex-1 p-6 lg:p-10 pt-24 lg:pt-8 relative z-10 overflow-y-auto">
+        <div class="row-start-2 col-start-2 min-h-screen lg:min-h-0 flex flex-col lg:overflow-hidden">
+            <main class="flex-1 p-6 lg:p-10 pt-24 lg:pt-8 pb-24 lg:pb-10 relative z-10 lg:overflow-y-auto">
             <div class="absolute inset-0 bg-[radial-gradient(#f97316/[0.012]_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none -z-10"></div>
 
             <!-- Context Messages Block -->
