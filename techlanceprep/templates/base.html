@@ -40,38 +40,8 @@
     <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/css/tailwind.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: {
-                            canvas: '#fafafa',    /* Smooth Light Gray-White */
-                            surface: '#ffffff',   /* Card Background */
-                            ink: '#18181b',       /* Obsidian Black (Primary Text) */
-                            muted: '#52525b',     /* Secondary Text */
-                            soft: '#d4d4d8',      /* Borders & Icons */
-                            amber: '#f97316',     /* Brand Electric Amber Main Action */
-                            amberLight: '#fef3c7'  /* Muted Soft Amber Highlights/Pills */
-                        }
-                    },
-                    boxShadow: {
-                        'premium-sm': '0 2px 8px -1px rgba(24, 24, 27, 0.02), 0 1px 3px -1px rgba(24, 24, 27, 0.01)',
-                        'premium-md': '0 12px 30px -4px rgba(24, 24, 27, 0.04), 0 4px 12px -2px rgba(24, 24, 27, 0.02)'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
-        .glass-nav { backdrop-filter: blur(16px); background: rgba(250, 250, 250, 0.85); }
-        .glass-card { backdrop-filter: blur(12px); background: rgba(255, 255, 255, 0.8); }
-    </style>
 </head>
 <body class="bg-brand-canvas text-brand-ink min-h-screen flex flex-col selection:bg-brand-amber selection:text-white">
 

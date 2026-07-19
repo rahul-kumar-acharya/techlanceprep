@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-canvas: #fafafa;
+  --color-brand-surface: #ffffff;
+  --color-brand-ink: #18181b;
+  --color-brand-muted: #52525b;
+  --color-brand-soft: #e4e4e7;
+  --color-brand-amber: #f97316;
+  --color-brand-amberLight: #fef3c7;
+
+  --shadow-premium-sm: 0 2px 8px -1px rgba(24, 24, 27, 0.02), 0 1px 3px -1px rgba(24, 24, 27, 0.01);
+  --shadow-premium-md: 0 12px 30px -4px rgba(24, 24, 27, 0.04), 0 4px 12px -2px rgba(24, 24, 27, 0.02);
+}
+
+@utility glass-nav {
+  backdrop-filter: blur(16px);
+  background: rgba(250, 250, 250, 0.85);
+}
+
+@utility glass-card {
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+@utility tracking-institutional {
+  letter-spacing: 0.4em;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sidebar transitions */
+#sidebar {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 1023px) {
+  .sidebar-closed {
+    transform: translateX(-100%);
+  }
+}
+
+@media (min-width: 1024px) {
+  #sidebar {
+    transform: translateX(0) !important;
+    position: relative !important;
+  }
+}

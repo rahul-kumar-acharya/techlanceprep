@@ -1,1 +1,38 @@
+# ==========================================
+# Python & Django Specific Files
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
 server/
+.env
+db.sqlite3
+staticfiles/
+
+# ==========================================
+# NodeJS & Frontend Packages
+# ==========================================
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.parcel-cache
+
+# ==========================================
+# System & IDE Specific Files
+# ==========================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.log

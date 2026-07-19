@@ -1,0 +1,26 @@
+{
+  "name": "techlanceprep",
+  "version": "1.0.0",
+  "description": "> **The High-Performance Engineering Command Center for Mastering DSA, System Design, and Behavioral Interview Tracks.**",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx @tailwindcss/cli -i ./techlanceprep/core/static/css/input.css -o ./techlanceprep/core/static/css/tailwind.css --minify",
+    "watch": "npx @tailwindcss/cli -i ./techlanceprep/core/static/css/input.css -o ./techlanceprep/core/static/css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulacharya1/techlanceprep.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rahulacharya1/techlanceprep/issues"
+  },
+  "homepage": "https://github.com/rahulacharya1/techlanceprep#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
