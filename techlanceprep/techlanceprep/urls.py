@@ -20,7 +20,7 @@ urlpatterns = [
     path('practice/', include('practice.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
-    path('favicon.ico', RedirectView.as_view(url='/static/images/favicon.svg')),
+    path('favicon.ico', RedirectView.as_view(url='/static/images/favicon.ico')),
 ]
 
 if settings.DEBUG:
