@@ -3,6 +3,7 @@ from django.urls import reverse
 from .models import Topic, Question
 
 class StaticViewSitemap(Sitemap):
+    protocol = 'https'
     priority = 0.8
     changefreq = 'weekly'
 
@@ -14,6 +15,7 @@ class StaticViewSitemap(Sitemap):
 
 
 class TopicSitemap(Sitemap):
+    protocol = 'https'
     priority = 0.9
     changefreq = 'weekly'
 
@@ -21,6 +23,7 @@ class TopicSitemap(Sitemap):
         return Topic.objects.all().order_by('name')
 
 class QuestionSitemap(Sitemap):
+    protocol = 'https'
     priority = 1.0
     changefreq = 'daily'
 
