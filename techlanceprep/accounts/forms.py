@@ -39,6 +39,21 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ['email', 'username', 'password1', 'password2']
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            email = email.lower().strip()
+            if User.objects.filter(email__iexact=email).exists():
+                raise forms.ValidationError("A user with this email address already exists.")
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if username:
+            if User.objects.filter(username__iexact=username).exists():
+                raise forms.ValidationError("A user with this username already exists.")
+        return username
+
 
 # ----------------------------
 # User Login Form
@@ -57,6 +72,12 @@ class UserLoginForm(forms.Form):
             'placeholder': 'Password'
         })
     )
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            email = email.lower().strip()
+        return email
 
 
 # ----------------------------
@@ -81,6 +102,21 @@ class UserUpdateForm(forms.ModelForm):
                 'class': 'w-full px-4 py-2 border rounded-lg'
             }),
         }
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email:
+            email = email.lower().strip()
+            if User.objects.filter(email__iexact=email).exclude(pk=self.instance.pk).exists():
+                raise forms.ValidationError("A user with this email address already exists.")
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if username:
+            if User.objects.filter(username__iexact=username).exclude(pk=self.instance.pk).exists():
+                raise forms.ValidationError("A user with this username already exists.")
+        return username
 
 
 # ----------------------------
