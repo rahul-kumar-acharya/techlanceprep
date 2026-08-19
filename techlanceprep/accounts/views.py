@@ -69,3 +69,8 @@ def profile(request):
         form = ProfileUpdateForm(instance=request.user.profile)
     return render(request, 'accounts/profile.html', {'form': form})
 
+
+def login_cancelled_redirect(request):
+    messages.warning(request, "Google sign-in was cancelled.")
+    return redirect('login')
+

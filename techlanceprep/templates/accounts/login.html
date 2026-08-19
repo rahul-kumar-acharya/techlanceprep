@@ -109,6 +109,29 @@
                 </div>
             </form>
 
+            <!-- Divider and Social Logins -->
+            <div class="mt-6 relative">
+                <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div class="w-full border-t border-brand-ink/[0.06]"></div>
+                </div>
+                <div class="relative flex justify-center text-xs uppercase tracking-wider font-bold">
+                    <span class="px-3 bg-brand-surface text-brand-muted text-[10px]">Or continue with</span>
+                </div>
+            </div>
+
+            <div class="mt-6">
+                {% load socialaccount %}
+                <a href="{% provider_login_url 'google' process='login' %}" class="flex items-center justify-center gap-3 w-full border border-brand-ink/[0.08] hover:border-brand-amber/50 bg-brand-canvas hover:bg-brand-surface py-3.5 rounded-xl font-bold uppercase tracking-[0.15em] text-[10px] text-brand-muted hover:text-brand-ink shadow-premium-sm transition-all transform hover:-translate-y-0.5 active:scale-[0.99]">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21.35,11.1H12v2.7h5.38C17.15,14.91,15.93,15.98,14.3,16.51v3.29h3.76C20.26,17.75,22,14.68,22,11.1C22,10.5,21.93,10.03,21.35,11.1Z" fill="#4285F4"/>
+                        <path d="M12,21c2.43,0,4.47-0.81,5.96-2.2l-3.76-3.29C13.1,16.27,11.83,16.5,12,16.5c-2.8,0-5.17-1.89-6.02-4.43H2.07v3.4C3.89,18.87,7.66,21,12,21Z" fill="#34A853"/>
+                        <path d="M5.98,12.07c-0.22-0.66-0.35-1.37-0.35-2.07c0-0.7,0.13-1.41,0.35-2.07V4.53H2.07C1.29,6.09,0.85,7.84,0.85,10c0,2.16,0.44,3.91,1.22,5.47l3.91-3.4Z" fill="#FBBC05"/>
+                        <path d="M12,5.5c1.32,0,2.5,0.45,3.43,1.35l2.58-2.58C16.45,2.78,14.41,2,12,2C7.66,2,3.89,4.13,2.07,7.6l3.91,3.4C6.83,8.46,9.2,6.5c2.8,0,5.17-1.04,6.02-1.04Z" fill="#EA4335"/>
+                    </svg>
+                    <span>Google Account</span>
+                </a>
+            </div>
+
             <div class="mt-8 pt-8 border-t border-brand-ink/[0.06] text-center">
                 <p class="text-brand-muted text-sm font-medium">
                     New to the platform? 

@@ -329,7 +329,7 @@
             // Start loader compile simulation
             startLoaderAnimation();
 
-            // Auto-dismiss Django notifications after 2 seconds
+            // Auto-dismiss Django notifications after 3 seconds
             const items = document.querySelectorAll('.notification-item');
             items.forEach((item) => {
                 setTimeout(() => {
@@ -338,7 +338,7 @@
                     setTimeout(() => {
                         item.remove();
                     }, 300);
-                }, 2000);
+                }, 3000);
             });
         });
 

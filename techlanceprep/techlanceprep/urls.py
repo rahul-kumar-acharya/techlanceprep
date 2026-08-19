@@ -17,6 +17,7 @@ urlpatterns = [
     path('tech-admin/', include('admin_panel.urls')),
     path('', include('core.urls')),
     path('accounts/', include('accounts.urls')),
+    path('accounts/', include('allauth.urls')),
     path('practice/', include('practice.urls')),
     path('dashboard/', include('dashboard.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
