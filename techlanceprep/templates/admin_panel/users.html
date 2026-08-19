@@ -96,22 +96,22 @@
                         <!-- Column: Action Execution Controls -->
                         <td class="px-8 py-5 whitespace-nowrap text-right">
                             <div class="flex justify-end gap-2 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200">
-                                <a href="{% url 'view_user' user.id %}" class="w-8 h-8 flex items-center justify-center bg-brand-canvas text-brand-muted border border-brand-soft rounded hover:bg-brand-ink hover:text-brand-surface hover:border-brand-ink transition-colors shadow-premium-sm" title="View Profile Ledger">
+                                <a href="{% url 'view_user' user.username %}" class="w-8 h-8 flex items-center justify-center bg-brand-canvas text-brand-muted border border-brand-soft rounded hover:bg-brand-ink hover:text-brand-surface hover:border-brand-ink transition-colors shadow-premium-sm" title="View Profile Ledger">
                                     <i class="fas fa-eye text-[10px]"></i>
                                 </a>
                                 
                                 {% if request.user.is_superuser and user != request.user %}
                                     {% if user.is_admin %}
-                                        <a href="{% url 'toggle_user_admin' user.id %}" class="w-8 h-8 flex items-center justify-center bg-brand-canvas text-brand-amber border border-brand-amber/30 rounded hover:bg-brand-amber hover:text-brand-surface hover:border-brand-amber transition-colors shadow-premium-sm" title="Revoke Administrative Clearances">
+                                        <a href="{% url 'toggle_user_admin' user.username %}" class="w-8 h-8 flex items-center justify-center bg-brand-canvas text-brand-amber border border-brand-amber/30 rounded hover:bg-brand-amber hover:text-brand-surface hover:border-brand-amber transition-colors shadow-premium-sm" title="Revoke Administrative Clearances">
                                             <i class="fas fa-user-minus text-[10px]"></i>
                                         </a>
                                     {% else %}
-                                        <a href="{% url 'toggle_user_admin' user.id %}" class="w-8 h-8 flex items-center justify-center bg-brand-canvas text-emerald-600 border border-emerald-200 rounded hover:bg-emerald-500 hover:text-brand-surface hover:border-emerald-500 transition-colors shadow-premium-sm" title="Grant Administrative Clearances">
+                                        <a href="{% url 'toggle_user_admin' user.username %}" class="w-8 h-8 flex items-center justify-center bg-brand-canvas text-emerald-600 border border-emerald-200 rounded hover:bg-emerald-500 hover:text-brand-surface hover:border-emerald-500 transition-colors shadow-premium-sm" title="Grant Administrative Clearances">
                                             <i class="fas fa-user-plus text-[10px]"></i>
                                         </a>
                                     {% endif %}
                                     
-                                    <button type="button" data-url="{% url 'delete_user' user.id %}" data-message="Are you sure you want to permanently delete user '{{ user.username }}'? All their bookmarks, completions, and profile data will be permanently purged." class="btn-delete-trigger w-8 h-8 flex items-center justify-center bg-brand-canvas text-rose-600 border border-rose-200 rounded hover:bg-rose-500 hover:text-brand-surface hover:border-rose-500 transition-colors shadow-premium-sm" title="Purge Identity Logs">
+                                    <button type="button" data-url="{% url 'delete_user' user.username %}" data-message="Are you sure you want to permanently delete user '{{ user.username }}'? All their bookmarks, completions, and profile data will be permanently purged." class="btn-delete-trigger w-8 h-8 flex items-center justify-center bg-brand-canvas text-rose-600 border border-rose-200 rounded hover:bg-rose-500 hover:text-brand-surface hover:border-rose-500 transition-colors shadow-premium-sm" title="Purge Identity Logs">
                                         <i class="fas fa-trash-can text-[10px]"></i>
                                     </button>
                                 {% endif %}

@@ -125,9 +125,9 @@ def add_topic(request):
 
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
-def edit_topic(request, topic_id):
+def edit_topic(request, topic_slug):
     """Edit existing topic"""
-    topic = get_object_or_404(Topic, id=topic_id)
+    topic = get_object_or_404(Topic, slug=topic_slug)
     
     if request.method == 'POST':
         topic.name = request.POST.get('name')
@@ -143,9 +143,9 @@ def edit_topic(request, topic_id):
 
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
-def delete_topic(request, topic_id):
+def delete_topic(request, topic_slug):
     """Delete a topic"""
-    topic = get_object_or_404(Topic, id=topic_id)
+    topic = get_object_or_404(Topic, slug=topic_slug)
     topic_name = topic.name
     
     # Delete all questions under this topic first
@@ -221,9 +221,9 @@ def add_question(request):
 
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
-def edit_question(request, question_id):
+def edit_question(request, question_slug):
     """Edit existing question"""
-    question = get_object_or_404(Question, id=question_id)
+    question = get_object_or_404(Question, slug=question_slug)
     topics = Topic.objects.all()
     
     if request.method == 'POST':
@@ -246,9 +246,9 @@ def edit_question(request, question_id):
 
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
-def delete_question(request, question_id):
+def delete_question(request, question_slug):
     """Delete a question"""
-    question = get_object_or_404(Question, id=question_id)
+    question = get_object_or_404(Question, slug=question_slug)
     question_title = question.title
     question.delete()
     messages.success(request, f'Question "{question_title}" deleted!')
@@ -276,9 +276,9 @@ def manage_users(request):
 
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
-def view_user(request, user_id):
+def view_user(request, username):
     """View user details with their bookmarks and completions"""
-    user = get_object_or_404(User, id=user_id)
+    user = get_object_or_404(User, username=username)
     bookmarks = Bookmark.objects.filter(user=user).select_related('question__topic')
     completions = CompletedQuestion.objects.filter(user=user).select_related('question__topic')
     
@@ -291,13 +291,13 @@ def view_user(request, user_id):
 
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
-def toggle_user_admin(request, user_id):
+def toggle_user_admin(request, username):
     """Toggle admin status of a user"""
     if not request.user.is_superuser:
         messages.error(request, 'Only superusers can perform this action')
         return redirect('manage_users')
     
-    user = get_object_or_404(User, id=user_id)
+    user = get_object_or_404(User, username=username)
     user.is_admin = not user.is_admin
     user.save()
     
@@ -311,13 +311,13 @@ def toggle_user_admin(request, user_id):
 
 @login_required(login_url='admin_login')
 @user_passes_test(is_admin)
-def delete_user(request, user_id):
+def delete_user(request, username):
     """Delete a user"""
     if not request.user.is_superuser:
         messages.error(request, 'Only superusers can perform this action')
         return redirect('manage_users')
     
-    user = get_object_or_404(User, id=user_id)
+    user = get_object_or_404(User, username=username)
     if user == request.user:
         messages.error(request, 'You cannot delete yourself!')
     else:
