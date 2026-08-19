@@ -364,6 +364,136 @@
                 startLoaderAnimation();
             }
         });
+
+        // Delete Confirmation Modal Controller
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('deleteConfirmModal');
+            const backdrop = document.getElementById('deleteModalBackdrop');
+            const card = document.getElementById('deleteModalCard');
+            const messageEl = document.getElementById('deleteModalMessage');
+            const confirmBtn = document.getElementById('deleteModalConfirm');
+            const cancelBtn = document.getElementById('deleteModalCancel');
+
+            if (!modal || !backdrop || !card || !messageEl || !confirmBtn || !cancelBtn) return;
+
+            function openModal(deleteUrl, customMessage) {
+                confirmBtn.href = deleteUrl;
+                messageEl.textContent = customMessage;
+
+                modal.classList.remove('pointer-events-none');
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                
+                backdrop.classList.remove('opacity-0');
+                backdrop.classList.add('opacity-100');
+                
+                card.classList.remove('opacity-0', 'scale-95');
+                card.classList.add('opacity-100', 'scale-100');
+            }
+
+            function closeModal() {
+                modal.classList.add('pointer-events-none');
+                modal.classList.remove('opacity-100');
+                modal.classList.add('opacity-0');
+                
+                backdrop.classList.remove('opacity-100');
+                backdrop.classList.add('opacity-0');
+                
+                card.classList.remove('opacity-100', 'scale-100');
+                card.classList.add('opacity-0', 'scale-95');
+            }
+
+            document.addEventListener('click', (e) => {
+                const trigger = e.target.closest('.btn-delete-trigger');
+                if (trigger) {
+                    e.preventDefault();
+                    const url = trigger.getAttribute('data-url');
+                    const message = trigger.getAttribute('data-message');
+                    openModal(url, message);
+                }
+            });
+
+            cancelBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+        });
     </script>
+
+    <style>
+        /* Custom modal styling matching the main page Amber & Ink theme */
+        #deleteConfirmModal {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #deleteModalBackdrop {
+            background-color: rgba(24, 24, 27, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            transition: opacity 0.3s ease-in-out;
+        }
+        #deleteModalCard {
+            background-color: #ffffff;
+            border: 1px solid rgba(24, 24, 27, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(24, 24, 27, 0.12);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .brand-icon-container {
+            background-color: #fff7ed; /* Light Amber */
+            border: 1px solid #ffedd5; /* Border Amber */
+            color: #f97316; /* Brand Amber */
+        }
+        .btn-modal-cancel {
+            background-color: #fafafa;
+            border: 1px solid #e4e4e7;
+            color: #71717a;
+            transition: all 0.2s ease;
+        }
+        .btn-modal-cancel:hover {
+            background-color: #ffffff;
+            border-color: #a1a1aa;
+            color: #18181b;
+        }
+        .btn-modal-confirm {
+            background-color: #18181b; /* Brand Ink */
+            color: #ffffff !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-modal-confirm:hover {
+            background-color: #f97316; /* Brand Amber */
+            transform: translateY(-1px);
+        }
+        .btn-modal-confirm:active {
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- Centered Premium Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <!-- Blur Backdrop -->
+        <div id="deleteModalBackdrop" class="absolute inset-0 transition-opacity duration-300 opacity-0"></div>
+        
+        <!-- Modal Card Content -->
+        <div id="deleteModalCard" class="rounded-[1.5rem] p-6 max-w-md w-full relative overflow-hidden transition-all duration-300 transform scale-95 opacity-0 z-10">
+            <!-- Top Amber Highlight Border Line -->
+            <div class="absolute top-0 left-0 w-full h-1" style="background-image: linear-gradient(to right, transparent, rgba(249, 115, 22, 0.4), transparent);"></div>
+            
+            <div class="flex items-start gap-4 mb-6">
+                <div class="brand-icon-container flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-premium-sm">
+                    <i class="fas fa-triangle-exclamation text-base"></i>
+                </div>
+                <div class="space-y-1.5" style="text-align: left;">
+                    <h3 class="text-sm font-extrabold text-brand-ink uppercase tracking-wider">Confirm Action</h3>
+                    <p id="deleteModalMessage" class="text-brand-muted text-xs leading-relaxed font-medium">Are you sure you want to permanently delete this resource?</p>
+                </div>
+            </div>
+            
+            <div class="flex justify-end gap-3 pt-2">
+                <button type="button" id="deleteModalCancel" class="btn-modal-cancel px-4 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-[0.15em] shadow-premium-sm">
+                    Cancel  
+                </button>
+                <a id="deleteModalConfirm" href="#" class="btn-modal-confirm px-4 py-2.5 rounded-lg text-[10px] font-bold uppercase tracking-[0.15em] shadow-premium-sm text-center">
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
