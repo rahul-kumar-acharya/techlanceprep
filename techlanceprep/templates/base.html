@@ -9,7 +9,9 @@
     <meta name="keywords" content="{% block meta_keywords %}coding interview preparation, technical interview questions, DSA practice, system design interview, software engineer career, TechlancePrep{% endblock %}">
     
     <meta name="author" content="TechlancePrep">
+    {% block robots_meta %}
     <meta name="robots" content="index, follow">
+    {% endblock %}
     <meta name="language" content="English">
     
     <!-- Google Search Console Verification -->
@@ -115,32 +117,39 @@
 
     <!-- Premium Header Area -->
     <nav class="sticky top-0 z-50 glass-nav border-b border-brand-ink/[0.06] transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center relative">
             
-            <!-- Logo Section -->
-            <a href="{% url 'home' %}" class="group flex items-center gap-2.5 text-base font-semibold tracking-tight text-brand-ink">
-                <div class="bg-brand-ink p-1.5 rounded-md flex items-center justify-center transition-all duration-300 group-hover:bg-brand-amber">
-                    <i class="fas fa-terminal text-brand-surface text-xs"></i>
-                </div>
-                <span class="font-bold tracking-tight text-brand-ink">TechlancePrep</span>
-            </a>
+            <!-- Left: Logo Section -->
+            <div class="flex items-center">
+                <a href="{% url 'home' %}" class="group flex items-center gap-2.5 text-base font-semibold tracking-tight text-brand-ink">
+                    <div class="bg-brand-ink p-1.5 rounded-md flex items-center justify-center transition-all duration-300 group-hover:bg-brand-amber">
+                        <i class="fas fa-terminal text-brand-surface text-xs"></i>
+                    </div>
+                    <span class="font-bold tracking-tight text-brand-ink">TechlancePrep</span>
+                </a>
+            </div>
             
-            <!-- Navigation Links -->
+            <!-- Center: Mathematically Centered Navigation Links -->
+            <div class="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center space-x-8 text-[13px] font-medium tracking-wide">
+                <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}text-brand-amber font-semibold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Home</a>
+                <a href="{% url 'about' %}" class="{% if request.resolver_match.url_name == 'about' %}text-brand-amber font-semibold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">About</a>
+                <a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}text-brand-amber font-semibold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Contact</a>
+                <a href="{% url 'all_topics' %}" class="{% if 'practice' in request.path or request.resolver_match.url_name == 'all_topics' or request.resolver_match.url_name == 'topic_questions' or request.resolver_match.url_name == 'question_detail' %}text-brand-amber font-semibold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Practice</a>
+            </div>
+            
+            <!-- Right: Authentication / Account Section -->
             <div class="hidden lg:flex items-center space-x-8 text-[13px] font-medium tracking-wide">
                 {% if user.is_authenticated %}
                     {% if user.is_superuser %}
-                        <a href="{% url 'admin_dashboard' %}" class="text-brand-ink font-semibold hover:text-brand-amber transition-colors">Admin Dashboard</a>
+                        <a href="{% url 'admin_dashboard' %}" class="{% if request.resolver_match.url_name == 'admin_dashboard' %}text-brand-amber font-semibold{% else %}text-brand-ink font-semibold hover:text-brand-amber{% endif %} transition-colors">Admin Panel</a>
                     {% else %}
-                        <a href="{% url 'all_topics' %}" class="text-brand-muted hover:text-brand-ink transition-colors">Practice</a>
-                        <a href="{% url 'pricing' %}" class="text-brand-muted hover:text-brand-ink transition-colors">Pricing</a>
-                        <a href="{% url 'faq' %}" class="text-brand-muted hover:text-brand-ink transition-colors">FAQ</a>
-                        <a href="{% url 'dashboard' %}" class="text-brand-muted hover:text-brand-ink transition-colors">Dashboard</a>
-                        <a href="{% url 'bookmark_list' %}" class="text-brand-muted hover:text-brand-ink transition-colors">Bookmarks</a>
+                        <a href="{% url 'dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}text-brand-amber font-semibold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Dashboard</a>
+                        <a href="{% url 'bookmark_list' %}" class="{% if request.resolver_match.url_name == 'bookmark_list' %}text-brand-amber font-semibold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Bookmarks</a>
                     {% endif %}
                     
                     <div class="flex items-center gap-4 pl-4 border-l border-brand-soft">
                         <span class="text-brand-muted font-normal">Welcome, <span class="text-brand-ink font-semibold">{{ user.username }}</span></span>
-                        <a href="{% url 'profile' %}" class="bg-brand-surface hover:bg-brand-canvas text-brand-ink px-4 py-2 rounded-md border border-brand-soft/60 shadow-premium-sm transition-all font-medium">
+                        <a href="{% url 'profile' %}" class="{% if request.resolver_match.url_name == 'profile' %}bg-brand-amber text-white border-brand-amber{% else %}bg-brand-surface hover:bg-brand-canvas text-brand-ink border-brand-soft/60{% endif %} px-4 py-2 rounded-md border shadow-premium-sm transition-all font-medium">
                             Profile
                         </a>
                         <a href="{% if user.is_superuser %}{% url 'admin_logout' %}{% else %}{% url 'logout' %}{% endif %}" class="text-brand-soft hover:text-red-500 transition-colors p-1" title="Sign Out">
@@ -148,10 +157,7 @@
                         </a>
                     </div>
                 {% else %}
-                    <a href="{% url 'all_topics' %}" class="text-brand-muted hover:text-brand-ink transition-colors">Practice</a>
-                    <a href="{% url 'pricing' %}" class="text-brand-muted hover:text-brand-ink transition-colors">Pricing</a>
-                    <a href="{% url 'faq' %}" class="text-brand-muted hover:text-brand-ink transition-colors">FAQ</a>
-                    <a href="{% url 'login' %}" class="text-brand-muted hover:text-brand-ink transition-colors">Login</a>
+                    <a href="{% url 'login' %}" class="{% if request.resolver_match.url_name == 'login' %}text-brand-amber font-semibold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Login</a>
                     <a href="{% url 'register' %}" class="bg-brand-ink hover:bg-brand-amber text-brand-surface px-4 py-2 rounded-md shadow-premium-sm transition-all font-semibold">
                         Get Started
                     </a>
@@ -167,11 +173,18 @@
         <!-- Mobile Drawer -->
         <div id="mobile-menu" class="hidden lg:hidden bg-brand-surface border-b border-brand-ink/[0.06] shadow-premium-md transition-all">
             <div class="px-6 py-5 space-y-3.5 text-[14px] font-medium">
-                <a href="{% url 'all_topics' %}" class="block text-brand-muted hover:text-brand-ink transition-colors">Practice</a>
-                <a href="{% url 'pricing' %}" class="block text-brand-muted hover:text-brand-ink transition-colors">Pricing</a>
-                <a href="{% url 'faq' %}" class="block text-brand-muted hover:text-brand-ink transition-colors">FAQ</a>
+                <a href="{% url 'home' %}" class="block {% if request.resolver_match.url_name == 'home' %}text-brand-amber font-bold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Home</a>
+                <a href="{% url 'about' %}" class="block {% if request.resolver_match.url_name == 'about' %}text-brand-amber font-bold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">About</a>
+                <a href="{% url 'contact' %}" class="block {% if request.resolver_match.url_name == 'contact' %}text-brand-amber font-bold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Contact</a>
+                <a href="{% url 'all_topics' %}" class="block {% if 'practice' in request.path or request.resolver_match.url_name == 'all_topics' or request.resolver_match.url_name == 'topic_questions' or request.resolver_match.url_name == 'question_detail' %}text-brand-amber font-bold{% else %}text-brand-muted hover:text-brand-ink{% endif %} transition-colors">Practice</a>
+                <hr class="border-brand-soft/40">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'dashboard' %}" class="block text-brand-muted hover:text-brand-ink transition-colors">Dashboard</a>
+                    {% if user.is_superuser %}
+                        <a href="{% url 'admin_dashboard' %}" class="block text-brand-ink font-semibold hover:text-brand-amber transition-colors">Admin Panel</a>
+                    {% else %}
+                        <a href="{% url 'dashboard' %}" class="block text-brand-muted hover:text-brand-ink transition-colors">Dashboard</a>
+                        <a href="{% url 'bookmark_list' %}" class="block text-brand-muted hover:text-brand-ink transition-colors">Bookmarks</a>
+                    {% endif %}
                     <hr class="border-brand-soft/40">
                     <a href="{% url 'profile' %}" class="block text-brand-muted hover:text-brand-ink transition-colors">Profile</a>
                     <a href="{% if user.is_superuser %}{% url 'admin_logout' %}{% else %}{% url 'logout' %}{% endif %}" class="block text-red-500 font-semibold transition-colors">Logout</a>
@@ -188,8 +201,27 @@
     {% if messages %}
         <div class="fixed top-20 right-6 z-[60] w-full max-w-sm space-y-3">
             {% for message in messages %}
-                <div class="notification-item p-4 rounded-lg shadow-premium-md border-l-4 border-l-brand-amber border border-brand-ink/[0.06] glass-card text-brand-ink flex items-start gap-3.5 transition-all duration-300 transform translate-x-0 text-[13px] leading-relaxed">
-                    <i class="fas fa-circle-info text-brand-amber mt-0.5"></i>
+                <div class="notification-item p-4 rounded-lg shadow-premium-md border-l-4 border border-brand-ink/[0.06] glass-card text-brand-ink flex items-start gap-3.5 transition-all duration-300 transform translate-x-0 text-[13px] leading-relaxed" 
+                     {% if 'success' in message.tags %}
+                        style="border-left-color: #10b981;"
+                     {% elif 'warning' in message.tags %}
+                        style="border-left-color: #f59e0b;"
+                     {% elif 'error' in message.tags %}
+                        style="border-left-color: #ef4444;"
+                     {% else %}
+                        style="border-left-color: #f97316;"
+                     {% endif %}>
+                    
+                    {% if 'success' in message.tags %}
+                        <i class="fas fa-circle-check mt-0.5" style="color: #10b981;"></i>
+                    {% elif 'warning' in message.tags %}
+                        <i class="fas fa-triangle-exclamation mt-0.5" style="color: #f59e0b;"></i>
+                    {% elif 'error' in message.tags %}
+                        <i class="fas fa-circle-exclamation mt-0.5" style="color: #ef4444;"></i>
+                    {% else %}
+                        <i class="fas fa-circle-info mt-0.5" style="color: #f97316;"></i>
+                    {% endif %}
+                    
                     <div class="flex-1">{{ message }}</div>
                 </div>
             {% endfor %}

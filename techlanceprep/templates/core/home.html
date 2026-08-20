@@ -93,7 +93,7 @@
 
 {% block content %}
 <!-- Hero Section (Optimized Width and Spacing) -->
-<section class="relative pt-28 pb-36 overflow-hidden bg-brand-canvas border-b border-brand-ink/[0.04]">
+<section class="relative pt-20 pb-28 overflow-hidden bg-brand-canvas border-b border-brand-ink/[0.04]">
     <!-- Technical Background Accents -->
     <div class="absolute inset-0 bg-[radial-gradient(#f97316/[0.015]_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none"></div>
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-amber/5 via-transparent to-transparent opacity-70 pointer-events-none"></div>
@@ -108,6 +108,7 @@
 
         <!-- Premium Display Headline with Amber Highlight -->
         <h1 class="text-5xl md:text-7xl font-extrabold mb-8 tracking-tight text-brand-ink leading-tight">
+            <span class="block text-[11px] uppercase text-brand-amber font-bold mb-5" style="letter-spacing: 0.25em;">TechlancePrep</span>
             Level up your code.<br/>
             <span class="text-brand-amber font-extrabold">
                 Lace your career.
@@ -133,6 +134,89 @@
                     Join Community
                 </a>
             {% endif %}
+        </div>
+
+        <!-- Centered Premium HTML/CSS Browser Workspace Mockup -->
+        <div class="max-w-5xl mx-auto rounded-2xl border border-brand-ink/[0.08] bg-brand-surface shadow-premium-lg overflow-hidden relative transition-all duration-300" style="margin-top: 4.5rem; margin-bottom: 4.5rem;">
+            <!-- Window Header Controls -->
+            <div class="flex items-center justify-between px-5 py-3.5 border-b border-brand-ink/[0.06] bg-brand-canvas/30 select-none">
+                <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                    <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                </div>
+                <div class="text-[10px] text-brand-muted uppercase tracking-[0.2em] font-bold">TechlancePrep Workspace</div>
+                <div class="w-12"></div> <!-- Spacer to center title -->
+            </div>
+            
+            <!-- Workspace Content Split Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 min-h-[360px] bg-brand-ink text-brand-surface text-left font-mono text-[11px] leading-relaxed">
+                <!-- Left Panel: Code Editor (2 Columns wide) -->
+                <div class="lg:col-span-2 p-6 border-r border-brand-surface/5 flex flex-col justify-between overflow-x-auto">
+                    <div>
+                        <!-- Editor Header File tab -->
+                        <div class="flex items-center gap-2 mb-5 text-brand-surface/40 text-[9px] uppercase tracking-wider font-bold select-none">
+                            <i class="fab fa-python text-brand-amber"></i> two_sum.py
+                        </div>
+                        
+                        <!-- Syntax Highlighted Code -->
+                        <pre class="text-brand-surface/80"><code><span class="text-brand-amber">class</span> <span class="text-emerald-500 font-bold">Solution</span>:
+    <span class="text-brand-amber">def</span> <span class="text-blue-400">twoSum</span>(self, nums: List[int], target: int) -> List[int]:
+        <span class="text-brand-surface/40"># Optimize search using hash map mapping</span>
+        seen = {}
+        <span class="text-brand-amber">for</span> i, num <span class="text-brand-amber">in</span> <span class="text-blue-400">enumerate</span>(nums):
+            diff = target - num
+            <span class="text-brand-amber">if</span> diff <span class="text-brand-amber">in</span> seen:
+                <span class="text-emerald-400 font-bold">return</span> [seen[diff], i]
+            seen[num] = i
+        <span class="text-emerald-400 font-bold">return</span> []</code></pre>
+                    </div>
+                    
+                    <!-- Editor Footer -->
+                    <div class="mt-8 pt-4 border-t border-brand-surface/5 flex justify-between items-center text-[9px] text-brand-surface/40 uppercase tracking-widest font-bold select-none">
+                        <span>Python 3.10</span>
+                        <span>Ln 9, Col 18</span>
+                    </div>
+                </div>
+                
+                <!-- Right Panel: Compiler Output & Metric Telemetry (1 Column wide) -->
+                <div class="p-6 bg-brand-ink/95 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 mb-5 text-brand-surface/40 text-[9px] uppercase tracking-wider font-bold select-none">
+                            <i class="fas fa-terminal"></i> Console Output
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="space-y-1">
+                                <div class="text-[9px] text-brand-surface/40 uppercase tracking-widest font-bold">Execution Status</div>
+                                <div class="text-emerald-500 font-bold flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span> Success (0.02s)
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-1">
+                                <div class="text-[9px] text-brand-surface/40 uppercase tracking-widest font-bold">Memory Overhead</div>
+                                <div class="text-brand-surface/80">14.2 MB</div>
+                            </div>
+                            
+                            <div class="space-y-2 pt-2 border-t border-brand-surface/5">
+                                <div class="text-[9px] text-brand-surface/40 uppercase tracking-widest font-bold">Metrics Earned</div>
+                                <div class="flex items-center gap-2">
+                                    <span class="px-2 py-0.5 rounded bg-brand-amber/15 text-brand-amber text-[9px] font-bold">+10 EXP</span>
+                                    <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-500 text-[9px] font-bold">COMPLETED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Console action block button -->
+                    <div class="mt-8">
+                        <a href="{% url 'all_topics' %}" class="block w-full py-2.5 rounded-lg bg-brand-amber hover:bg-brand-amber/90 text-white font-bold text-center text-[10px] uppercase tracking-widest shadow-premium-sm transition-all transform hover:-translate-y-0.5">
+                            Next Challenge
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="mt-14 flex items-center justify-center gap-8 text-brand-muted text-sm font-semibold opacity-90">
